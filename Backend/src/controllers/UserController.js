@@ -16,7 +16,35 @@ class UserController {
 }
 
     listarUsuarios(request, response) {
-        database.select('*').table
+        database.select('*').table('users').then((users) => {
+            response.send(users)
+        }).catch((error) => {
+             console.error(error)
+             response.status(500).send('Erro ao listar usuarios')
+        })
+    }
+
+    cadastraPessoa(request, response) {
+        
+        const {nome, data_nascimento, cpf, genero, estado, cidade, bairro, logradouro, numero, complemento} = request.body
+
+        database.insert({nome, data_nascimento, cpf, genero, estado, cidade, bairro, logradouro, numero, complemento})
+        .table('pessoas').then(data => {
+            console.log(data)
+            response.json({message:'Pessoa cadastrada com sucesso!'})
+        }).catch(err => {
+                console.error(err)
+            })
+        }
+    
+
+    listarPessoas(req, res) {
+        database.select('*').table('pessoas').then(data=>{
+            console.log(data)
+            res.json(data)
+        }).catch(err => {
+            console.error(err)
+        })
     }
 }
 module.exports = new UserController()

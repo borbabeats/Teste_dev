@@ -1,56 +1,65 @@
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as yup from 'yup';
-import axios from 'axios';
+import Input from '../Components/form/Input';
+import Submit from '../Components/form/Submit';
+import { useState } from 'react';
+import api from '../Services/Api';
+import { validarSenha } from '../Utils/validation';
+import UserService from '../Services/UserService'
 
+
+const userService = new UserService()
 
 function Login() {
-  const schema = yup.object().shape({
-    user: yup.string().required('Campo "user" e obrigatorio'),
-    password: yup.string().required('Campo "senha" e obrigatorio')
-  })
+  const [form, setform] = useState([])
 
 
-  async function handleLogin(values) {
+  async function handleLogin(e) {
+    e.preventDefault()
     try {
-      const response = await axios.post('http:/localhost:5000/login', values)
-      const data = response.data
-      if (response.status === 200) {
-        
-       
-        //Send form data to MySQL database
-        await axios.post('http:/localhost:3000/login', values)
-      } else {
-        alert(data.message)
+      const response = await userService.login(form)
+      console.log('response do login',response)
+      if (response === true) {
+        <Navigate to />
+        //to home
       }
-    } catch (error) {
-      console.error(error)
-      alert('An error occurred while logging in')
+      alert('Envia') 
+    } catch (err) {
+      console.error(err)
     }
   }
 
+  function handleChange (e) {
+    setform({...form, [e.target.name]: e.target.value})
+    console.log(form)
+  }
+
+  const validadorInput = () => {
+    return validarSenha(form.password)
+  }
+
+  console.log(validadorInput())
+
   return (
-    <>
+    <div className='login-screen '>
       <h1>Login</h1>
-      <Formik initialValues={{ user: '', password: '' }}
-        validationSchema={schema}
-        onSubmit={(values, { setSubmitting }) => {
-          handleLogin(values)
-          setSubmitting(false)
-        }}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <Field type='text' name='user' />
-            <ErrorMessage name='user' component='div' />
-            <Field type='password' name='password' />
-            <ErrorMessage name='password' component='div' />
-            <button type='submit' disabled={isSubmitting}>
-              Enviar
-            </button>
-          </Form>
-        )}
-      </Formik>
-    </>
+      <form onSubmit={handleLogin}>
+        <Input 
+          text='Usuario'
+          type='text'
+          name='usuario'
+          placeholder='Digite o seu usuario'
+          onChange={handleChange}
+        />
+        <Input 
+          text='Senha'
+          type='password'
+          name='password'
+          placeholder='Digite sua senha'
+          onChange={handleChange}
+        />
+        <Submit text='Entrar' />
+      </form>
+       
+    </div>
   )
 }
 

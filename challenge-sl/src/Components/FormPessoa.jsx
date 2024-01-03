@@ -1,107 +1,81 @@
-import { useEffect, useState } from 'react'
+import {  useState } from 'react'
 import Input from './form/Input'
 import Select from './form/Select'
 import Submit from './form/Submit'
-
-function FormPessoa({ pessoaData }) {
-
-    const [estado, setEstado] = useState([])
-    const [cidade, setCidade] = useState([])
-    const [pessoa, setPessoa] = useState(pessoaData || {})
-
-    //get estado
-    useEffect(() => {
-        const Api = 'https://servicodados.ibge.gov.br/api/v1/localidades/estados'
-        fetch(Api, {
-            method: "GET",
-            headers: {
-                'Content-Type': 'application/json',
-            },
-        }).then(res => res.json())
-        .then(data => {
-            const estados = data.map((estado) => ({
-                id: estado.id,
-                name: estado.nome,
-            }))
-            setEstado(estados)
-    }).catch(err => console.log(err))
-    }, [])
-
-    useEffect(() => {
-        if (pessoa.estado) {
-          const ApiCity = `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${pessoa.estado.id}/municipios`
-          fetch(ApiCity, {
-            method: "GET",
-            headers: {
-              'Content-Type': 'application/json',
-            },
-          }).then(res => res.json())
-           .then(data => {
-              const cidades = data.map((cidade) => ({
-                id: cidade.id,
-                name: cidade.nome,
-              }))
-              setCidade(cidades)
-            }).catch(err => console.log(err))
-        }
-      }, [pessoa.estado])
+import api from '../Services/Api'
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
 
 
 
-    function handleEstado(e) {
-        const selectedEstado = estado.find(
-            (estado) => estado.id === e.target.value
-        ) 
-        setPessoa({ ...pessoa, 
-        estado: {
-            id: selectedEstado.id,
-            name: selectedEstado.name,
-        },
-        cidade: null,
-        })
-        setCidade([])
-    }
+function FormPessoa() {
+   const [pessoa, setPessoa] = useState({
+        name: '',
+        nascimento: '',
+        cpf: '',
+        genero: '',
+        estado: '',
+        cidade: '',
+        bairro: '',
+        logradouro: '',
+        numero: '',
+        complemento:''
+   })
 
-    function handleCidade(e) {
-        const selectedCidade = cidade.find(
-            (cidade) => cidade.id === e.target.value
-        )
-        if (selectedCidade) {
-        setPessoa({...pessoa,
-        cidade: {
-            id: selectedCidade.id,
-            name: selectedCidade.name,
-        },
-    })
-    }
+   const [modal, setModal] = useState(false)
+   const toggle = () => setModal(!modal)
+
+
+//handle change event
+function handleChange (e) {
+    setPessoa({ ...pessoa, [e.target.name]: e.target.value })
+    console.log(pessoa)
+    
 }
 
-    const sortedEstado = estado.sort((a, b) => a.name.localeCompare(b.name))
-    const sortedCidade = cidade.sort((a, b) => a.name.localeCompare(b.name))
+async function handleSubmit(e) {
+    e.preventDefault()
+    api.post('/pessoas', pessoa)
+    .then(res => {
+        console.log(res)
+        setModal(true)
+    })
+    .catch(err => {
+        console.error(err)
+    })
+}
 
 
     return (
-        <form onClick={''} className='form-pessoa' >
+        <>
+        <form  className='form-pessoa' onSubmit={handleSubmit} >
             
             <Input type='text'
-                name='name'
+                name='nome'
                 placeholder='Insira o nome:'
-                text='Nome' />
+                text='Nome'
+                onChange={handleChange}
+                required />
 
             <Input type='date'
-                name='nascimento'
+                name='data_nascimento'
                 placeholder='Insira a data de nascimento:'
-                text='Data de nascimento' />
+                text='Data de nascimento'
+                onChange={handleChange}
+                required/>
 
             <Input type='number'
                 name='cpf'
                 placeholder='Insira somente os nros:'
                 maxlength='11'
-                text='CPF' />
+                text='CPF'
+                onChange={handleChange}
+                required />
 
             <Select 
                 name='genero'
                 text='Selecione o Genero'
+                required='true'
+                onChange={handleChange}
                 options={[
                     {id: 'M', name: 'Masculino'},
                     {id: 'F', name: 'Feminino'},
@@ -109,26 +83,58 @@ function FormPessoa({ pessoaData }) {
                 ]}
             
             /> 
-            <Select 
+            
+            <Input 
             name='estado'
-            text='Selecione o Estado'
-            options={sortedEstado}
-            handleOnChange={handleEstado}
-            defaultValue=''
+            text='Estado'
+            onChange={handleChange}
             />  
-            <Select
+            <Input
             name='cidade'
-            text='Selecione a Cidade'
-            options={sortedCidade}
-            handleOnChange={handleCidade}
-            defaultValue=''
-
+            text='Cidade'
+            onChange={handleChange}
+            />
+            <Input
+            name='bairro'
+            text='Bairro'
+            onChange={handleChange}
+            />
+            <Input
+            name='logradouro'
+            text='Logradouro'
+            onChange={handleChange}
+            />
+            <Input
+            name='numero'
+            text='Numero'
+            type='number'
+            onChange={handleChange}
+            />
+            <Input
+            name='complemento'
+            text='Complemento'
+            onChange={handleChange}
             />
 
 
             <Submit text='Enviar' />
-              
         </form>
+        
+        <Modal isOpen={modal} toggle={toggle}>
+            <ModalHeader toggle={toggle}>
+                Info
+            </ModalHeader>
+            <ModalBody>
+                Usuario criado com sucesso!!
+            </ModalBody>
+            <ModalFooter>
+                <Button color='primary' onClick={toggle}>
+                    OK
+                </Button>
+            </ModalFooter>
+        </Modal>
+
+        </>
         
     )
 }

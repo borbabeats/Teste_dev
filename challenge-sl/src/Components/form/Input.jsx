@@ -1,4 +1,5 @@
-function Input({ text, type, name, placeholder, value, maxlength }) {
+// eslint-disable-next-line react/prop-types
+function Input({ text, type, name, placeholder, value, maxlength, onKeyUp, onChange, defaultValue }) {
     return (
         <>
         <label htmlFor={name}>{text}:</label>
@@ -7,10 +8,13 @@ function Input({ text, type, name, placeholder, value, maxlength }) {
         name={name} 
         id={name}  
         placeholder={placeholder} 
-        defaultValue={value}
+        value={value}
         maxLength={maxlength}
-        />
+        onKeyUp={onKeyUp}
+        onChange={onChange}
+        defaultValue={defaultValue}
         
+        />
         </>
     )
 }
