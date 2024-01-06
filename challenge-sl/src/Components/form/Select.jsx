@@ -1,4 +1,4 @@
-function Select({ text, name, value, onChange, options }) {
+function Select({ text, name, value, onChange, options, defaultOptionText }) {
     return(
         <>
         <label htmlFor={name}>{text}:</label>
@@ -7,20 +7,21 @@ function Select({ text, name, value, onChange, options }) {
             name={name}
             onChange={onChange}
             defaultValue={value || ''}
-       
+            aria-labelledby={name}
             >
-            <option>Selecione uma opcao</option>
+            <option value='' disabled>
+                {defaultOptionText || 'Selecione uma opcao'}
+            </option>
             {options.map((option) => (
-                <option value={option.id} key={option.id}>
-                    {option.name}
+                <option value={option.value} key={option.value}>
+                   {option.nome}
                 </option>
             ))}
-          
-            
         </select>
         </>
     )
 }
+
 
 
 export default Select

@@ -46,5 +46,27 @@ class UserController {
             console.error(err)
         })
     }
+
+    novoProtocolo(req, res) {
+        const {descricao, data_protocolo, prazo, contribuinte} = req.body
+
+        database.insert({descricao, data_protocolo, prazo, contribuinte})
+        .table('protocolos').then(data => {
+            console.log(data)
+            res.json({message: 'Protocolo preenchido com sucesso!'})
+        }).catch(err => {
+            console.error(err)
+        })
+
+    }
+
+    listarProtocolos(req, res){
+        database.select('*').table('protocolos').then(data => {
+            console.log(data)
+            res.json(data)
+        }).catch(err => {
+            console.error(err)
+        })
+    }
 }
 module.exports = new UserController()

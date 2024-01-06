@@ -1,6 +1,9 @@
+import FormProtocol from "../Components/FormProtocol"
+
 function Protocol() {
     return(
-        <h1>Protocolos</h1>
+        <FormProtocol/>
+       
     )
 }
 

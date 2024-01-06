@@ -3,7 +3,7 @@ import Input from './form/Input'
 import Select from './form/Select'
 import Submit from './form/Submit'
 import api from '../Services/Api'
-import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from 'reactstrap'
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Container, Col, Row} from 'reactstrap'
 
 
 
@@ -46,9 +46,22 @@ async function handleSubmit(e) {
 
 
     return (
-        <>
-        <form  className='form-pessoa' onSubmit={handleSubmit} >
-            
+        <Container className='bg-white p-1'>
+            <Row> 
+                <Col lg='6'> 
+        <Modal isOpen={modal} toggle={toggle} >
+            <ModalHeader toggle={toggle} className='info'>Information</ModalHeader>
+            <ModalBody color='secondary'>
+                Usuario criado com sucesso!!
+            </ModalBody>
+            <ModalFooter>
+                <Button  color='success' onClick={toggle}>OK</Button>
+            </ModalFooter>
+        </Modal>
+        </Col>
+        
+        <form  onSubmit={handleSubmit} className='bg-white'  >
+                <h1>Cadastrar Pessoa</h1>
             <Input type='text'
                 name='nome'
                 placeholder='Insira o nome:'
@@ -120,21 +133,11 @@ async function handleSubmit(e) {
             <Submit text='Enviar' />
         </form>
         
-        <Modal isOpen={modal} toggle={toggle}>
-            <ModalHeader toggle={toggle}>
-                Info
-            </ModalHeader>
-            <ModalBody>
-                Usuario criado com sucesso!!
-            </ModalBody>
-            <ModalFooter>
-                <Button color='primary' onClick={toggle}>
-                    OK
-                </Button>
-            </ModalFooter>
-        </Modal>
-
-        </>
+        
+       
+        
+        </Row>
+        </Container>
         
     )
 }

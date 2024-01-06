@@ -1,33 +1,9 @@
-#root {
-  margin: 0;
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  background-color: #ddd;
-  border-radius: 0.75em;
-}
+
 
 h1, h2, h3, h4,h5, label, span {
   color: #171717;
 }
 
-
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
 
 .card {
   padding: 2em;
@@ -38,18 +14,13 @@ h1, h2, h3, h4,h5, label, span {
 }
 
 input, select, button {
-  padding: 0.75em;
+  padding: 0.5em;
+  outline: none;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  text-align: start;
   gap: .4rem;
-}
-
-.form-pessoa {
-  max-width: 500px;
 }
 

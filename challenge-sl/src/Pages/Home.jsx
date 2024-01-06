@@ -4,12 +4,12 @@ function Home() {
     return (
         <>
             <LinkButton
-                text='Cadastrar uma nova pessoa'
-                to='/cadastrapessoa'
+                text='Painel de controle de Pessoas'
+                to='/dashboardpessoas'
             />
             <LinkButton
-                text='Preencher protocolo'
-                to='/protocolo'
+                text='Painel de controle de protocolos'
+                to='/dashboardprotocolo'
             />
         </>
     )
