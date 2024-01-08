@@ -47,10 +47,24 @@ class UserController {
         })
     }
 
-    novoProtocolo(req, res) {
-        const {descricao, data_protocolo, prazo, contribuinte} = req.body
+    deletarPessoa(req, res) {
+        const id = req.params.id
 
-        database.insert({descricao, data_protocolo, prazo, contribuinte})
+        database.where({ id:id }).del().table('pessoas').then(deleteRows => {
+            if (deleteRows > 0) {
+                res.json({ message: 'Pessoa deletada da lista de cadastro' })
+            } else {
+                res.status(404).json({ message: 'Pessoa nao encontrada' })
+            }
+        }).catch(error => {
+            res.status(500).json({  error: 'Erro ao deletar pessoa', details: error })
+        })
+    }
+
+    novoProtocolo(req, res) {
+        const {descricao, data_protocolo, prazo, nome} = req.body
+
+        database.insert({descricao, data_protocolo, prazo, nome})
         .table('protocolos').then(data => {
             console.log(data)
             res.json({message: 'Protocolo preenchido com sucesso!'})
@@ -62,6 +76,29 @@ class UserController {
 
     listarProtocolos(req, res){
         database.select('*').table('protocolos').then(data => {
+            console.log(data)
+            res.json(data)
+        }).catch(err => {
+            console.error(err)
+        })
+    }
+
+    deletarProtocolo(req, res) {
+        const id = req.params.id
+
+        database.where({ id:id }).del().table('protocolos').then(deleteRows => {
+            if (deleteRows > 0) {
+                res.json({ message: 'Protocolo deletado da lista de cadastro' })
+            } else {
+                res.status(404).json({ message: 'Protocolo nao encontrado' })
+            }
+        }).catch(error => {
+            res.status(500).json({  error: 'Erro ao deletar protocolo', details: error })
+        })
+    }
+
+    listarGenero(req, res) {
+        database.select('*').table('gender').then(data => {
             console.log(data)
             res.json(data)
         }).catch(err => {

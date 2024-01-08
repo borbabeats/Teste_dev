@@ -1,22 +1,26 @@
-function Select({ text, name, value, onChange, options, defaultOptionText }) {
+function Select({ text, name, onChange, options, required }) {
     return(
         <>
-        <label htmlFor={name}>{text}:</label>
+        <label htmlFor={name}>
+            {text}
+            {required && <span className='text-danger'>*</span>}
+        </label>
         <select 
             id={name}
             name={name}
             onChange={onChange}
-            defaultValue={value || ''}
-            aria-labelledby={name}
+            required={required}
             >
-            <option value='' disabled>
-                {defaultOptionText || 'Selecione uma opcao'}
-            </option>
-            {options.map((option) => (
-                <option value={option.value} key={option.value}>
-                   {option.nome}
-                </option>
+            
+                <option value=''>{text}</option>
+
+                {options.map(option => (
+                    <option value={option.id} key={option.id}>
+                        {option.nome}
+                    </option>
             ))}
+                
+          
         </select>
         </>
     )

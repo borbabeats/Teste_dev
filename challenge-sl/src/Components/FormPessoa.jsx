@@ -1,4 +1,4 @@
-import {  useState } from 'react'
+import {  useEffect, useState } from 'react'
 import Input from './form/Input'
 import Select from './form/Select'
 import Submit from './form/Submit'
@@ -8,9 +8,10 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Container, Col, Row
 
 
 function FormPessoa() {
+    const [genderOptions, setGenderOptions] = useState([])
    const [pessoa, setPessoa] = useState({
-        name: '',
-        nascimento: '',
+        nome: '',
+        data_nascimento: '',
         cpf: '',
         genero: '',
         estado: '',
@@ -21,6 +22,10 @@ function FormPessoa() {
         complemento:''
    })
 
+   useEffect(() => {
+    searchGender()
+   }, [])
+
    const [modal, setModal] = useState(false)
    const toggle = () => setModal(!modal)
 
@@ -28,7 +33,6 @@ function FormPessoa() {
 //handle change event
 function handleChange (e) {
     setPessoa({ ...pessoa, [e.target.name]: e.target.value })
-    console.log(pessoa)
     
 }
 
@@ -38,19 +42,42 @@ async function handleSubmit(e) {
     .then(res => {
         console.log(res)
         setModal(true)
+        
     })
     .catch(err => {
         console.error(err)
     })
 }
 
+async function searchGender() {
+    try {
+         await api.get('/genero')
+        .then(res => {
+            setGenderOptions(res.data)
+        }) 
+    } catch (err) {
+        console.log('Error fetching gender options:', err)
+    }
+}
+
+function reloadPage () {
+    setTimeout(() => { 
+    window.location.reload()
+   }, 800)
+}
+
+    const closeModalAndReload = () => {
+        setModal(false)
+        reloadPage()
+    }
+
 
     return (
         <Container className='bg-white p-1'>
             <Row> 
                 <Col lg='6'> 
-        <Modal isOpen={modal} toggle={toggle} >
-            <ModalHeader toggle={toggle} className='info'>Information</ModalHeader>
+        <Modal isOpen={modal} toggle={closeModalAndReload} >
+            <ModalHeader toggle={toggle} className='bg-info'>Information</ModalHeader>
             <ModalBody color='secondary'>
                 Usuario criado com sucesso!!
             </ModalBody>
@@ -87,14 +114,9 @@ async function handleSubmit(e) {
             <Select 
                 name='genero'
                 text='Selecione o Genero'
-                required='true'
+                required={true}
                 onChange={handleChange}
-                options={[
-                    {id: 'M', name: 'Masculino'},
-                    {id: 'F', name: 'Feminino'},
-                    {id: 'O', name: 'Outro'},
-                ]}
-            
+                options={genderOptions}
             /> 
             
             <Input 

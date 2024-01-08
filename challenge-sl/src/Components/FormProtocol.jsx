@@ -9,12 +9,12 @@ import { Modal, ModalHeader, ModalBody, ModalFooter, Button, Container, Col, Row
 
 
 function FormProtocol() {
-    const [selectOption, setSelectOption] = useState('')
+    const [options, setOptions] = useState([])
     const [protocolo, setProtocolo] = useState({
         descricao: '',
         data_protocolo: '',
         prazo: '',
-        contribuinte: ''
+        nome: ''
         
    })
 
@@ -25,16 +25,15 @@ function FormProtocol() {
 //handle change event
 function handleChange (e) {
     setProtocolo({ ...protocolo, [e.target.name]: e.target.value })
-    console.log(protocolo)
-    
 }
 
 async function handleSubmit(e) {
     e.preventDefault()
     try {
         const response = await api.post('/protocolos', protocolo)
-        console.log(response)
+
         setModal(true)
+        setProtocolo({ ...protocolo, id: response.data.id })
     } catch(err) {
         console.error(err)
     }
@@ -47,15 +46,10 @@ useEffect(() => {
 async function getPerson() {
     try {
         const response = await api.get('/pessoas')
-        console.log(response.data)
-        const formattedOptions = response.data.map(person => ({
-            id: person.id,
-            nome: person.nome
-        }))
-        setSelectOption(formattedOptions)
-        
+        setOptions(response.data)
     } catch (err) {
-        console.error(err)
+        console.error('Error fetching people:', err)
+  
     }
 }
 
@@ -65,7 +59,7 @@ async function getPerson() {
             <Row> 
                 <Col lg='6'> 
         <Modal isOpen={modal} toggle={toggle} >
-            <ModalHeader toggle={toggle} className='info'>Protocolo nro {protocolo.id}</ModalHeader>
+            <ModalHeader toggle={toggle} className='bg-info'>Protocolo nro {protocolo.id}</ModalHeader>
             <ModalBody color='secondary'>
                 Protocolo criado com sucesso!!
             </ModalBody>
@@ -101,14 +95,11 @@ async function getPerson() {
                 required />
 
             <Select 
-                name='contribuinte'
-                text='Contribuinte'
+                name='nome'
+                text='Selecione o contribuinte'
                 required={true}
                 onChange={handleChange}
-                options={selectOption}
-                defaultOptionText='Selecione uma opcao'
-                
-            
+                options={options}
             /> 
 
 
