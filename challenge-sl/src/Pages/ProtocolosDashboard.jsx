@@ -5,11 +5,14 @@ import { useState, useEffect } from 'react'
 import { SiProtondrive } from "react-icons/si";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
+import { Spinner } from 'reactstrap'
+
 
 function ProtocolosDashboard() {
     const [protocolo, setProtocolo] = useState([])
     const [modal, setModal] = useState(false)
     const [deleteProtocolId, setDeleteProtocolId] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     const toggle = () => setModal(!modal)
 
@@ -28,6 +31,8 @@ function ProtocolosDashboard() {
         setProtocolo(formattedProtocolos)
        } catch(err) {
         console.error(err)
+       } finally {
+        setLoading(false)
        }
     }
     
@@ -91,7 +96,15 @@ function ProtocolosDashboard() {
 
 
                 <Row className='mt-4'>
-                    {protocolo.map(p => (
+                {loading ? (
+                        <Col className='d-flex justify-content-center'>
+                        <Spinner type='grow' color="primary m-1"></Spinner>
+                        <Spinner type='grow' color="primary m-1"></Spinner>
+                        <Spinner type='grow' color="primary m-1"></Spinner>
+                       
+                    </Col>
+                    ) : (
+                    protocolo.map((p) => (
                         <li className='d-flex justify-content-between border p-3' key={p.id}>
                             <div>
                                 <p>Nro do Protocolo <strong>{p.id}</strong></p> 
@@ -103,7 +116,7 @@ function ProtocolosDashboard() {
                             </div>
 
                         </li>
-                 ))}
+                 )))}
                 </Row>
             </Col>
         </Container>

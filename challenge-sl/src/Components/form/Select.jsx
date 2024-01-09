@@ -15,7 +15,7 @@ function Select({ text, name, onChange, options, required }) {
                 <option value=''>{text}</option>
 
                 {options.map(option => (
-                    <option value={option.id} key={option.id}>
+                    <option value={option.name} key={option.id}>
                         {option.nome}
                     </option>
             ))}

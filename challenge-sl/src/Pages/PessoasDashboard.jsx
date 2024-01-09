@@ -5,12 +5,14 @@ import { useState, useEffect } from 'react'
 import { IoPersonAddSharp } from "react-icons/io5";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
+import { Spinner } from 'reactstrap'
 
 
 function PessoasDashboard() {
     const [pessoa, setPessoa] = useState([])
     const [modal, setModal] = useState(false)
     const [deletePersonId, setDeletePersonId] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     const toggle = () => setModal(!modal)
 
@@ -21,12 +23,14 @@ function PessoasDashboard() {
     
 
     async function getPessoas() {
-       api.get('/pessoas')
-       .then(res => {
-        setPessoa(res.data)
-       }).catch(res => {
-        console.error(res)
-       })
+        try {
+            const response = await api.get('/pessoas')
+            setPessoa(response.data)
+        } catch (err) {
+            console.error('Error fetching pessoas:', err)
+        } finally {
+            setLoading(false)
+        }
     }
 
     async function deletaPessoa(id) {
@@ -83,13 +87,21 @@ function PessoasDashboard() {
 
                 
                 <Row className='mt-4'>
-                    {pessoa.map(p => (
+                    {loading ? (
+                        <Col className='d-flex justify-content-center'>
+                        <Spinner type='grow' color="primary m-1"></Spinner>
+                        <Spinner type='grow' color="primary m-1"></Spinner>
+                        <Spinner type='grow' color="primary m-1"></Spinner>
+                       
+                    </Col>
+                    ) : (
+                    pessoa.map(p => (
                         <li className='d-flex flex-row justify-content-between border p-3' key={p.id}>
                             <div>{p.id} - {p.nome}</div>
                             <div className=''><Button className='d-flex flex-row align-items-center bg-danger' onClick={() => openDeleteModal(p.id)}><MdDeleteForever /><span className='text-white'>Delete</span></Button></div>
 
                         </li>
-                 ))}
+                 )))}
                 </Row>
             </Col>
         </Container>
