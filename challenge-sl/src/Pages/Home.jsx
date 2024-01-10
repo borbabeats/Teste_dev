@@ -4,20 +4,20 @@ import { Container, Col, Row } from 'reactstrap'
 function Home() {
     return (
         <Container>
-            <Col >
-                <Row className='mb-4'>
+            <Row >
+                <Col className='mb-4'>
                     <Card className='cards'
                         text='Painel de controle de Pessoas'
                         to='/dashboardpessoas'
                     />
-                </Row>
-                <Row>
+                </Col>
+                <Col>
                     <Card className='cards'
                         text='Painel de controle de protocolos'
                         to='/dashboardprotocolo'
                     />
-                </Row>
-            </Col>
+                </Col>
+            </Row>
             
         </Container>
     )

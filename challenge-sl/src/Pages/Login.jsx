@@ -42,7 +42,7 @@ function Login() {
     <div className='login-screen '>
       <h1>Login</h1>
       <form onSubmit={handleLogin}>
-        <Input 
+        <Input
           text='Usuario'
           type='text'
           name='usuario'
