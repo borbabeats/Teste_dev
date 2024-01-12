@@ -40,8 +40,19 @@ async function handleSubmit(e) {
     e.preventDefault()
     api.post('/pessoas', pessoa)
     .then(res => {
-        console.log(res)
         setModal(true)
+        setPessoa({
+            nome: '',
+            data_nascimento: '',
+            cpf: '',
+            genero: '',
+            estado: '',
+            cidade: '',
+            bairro: '',
+            logradouro: '',
+            numero: '',
+            complemento:''
+        })
         
     })
     .catch(err => {
@@ -68,7 +79,6 @@ function reloadPage () {
 
     const closeModalAndReload = () => {
         setModal(false)
-        reloadPage()
     }
 
 
