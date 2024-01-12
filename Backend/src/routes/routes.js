@@ -4,6 +4,8 @@ const router = express.Router()
 const UserController = require('../controllers/UserController')
 
 router.post('/users', UserController.novoUsuario)
+router.post('/users', UserController.checkLogin)
+
 router.post('/pessoas', UserController.cadastraPessoa)
 router.get('/pessoas', UserController.listarPessoas)
 router.delete('/deleta/pessoa/:id', UserController.deletarPessoa)

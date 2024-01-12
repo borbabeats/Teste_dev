@@ -1,51 +1,47 @@
+import { useState } from 'react';
 import Input from '../Components/form/Input';
 import Submit from '../Components/form/Submit';
-import { useState } from 'react';
-import api from '../Services/Api';
-import { validarSenha } from '../Utils/validation';
-import UserService from '../Services/UserService'
+import api from '../Services/Api'
+import { useNavigate } from 'react-router-dom';
 
 
-const userService = new UserService()
 
-function Login() {
-  const [form, setform] = useState([])
+const Login = () => {
+   const [values, setValues] = useState([])  
+  
+  const navigate = useNavigate()
 
-
-  async function handleLogin(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     try {
-      const response = await userService.login(form)
-      console.log('response do login',response)
-      if (response === true) {
-        <Navigate to />
-        //to home
+      const response = await api.post('/users', values)
+      if(response.data.Status === 'Success') {
+        navigate('/paginainicial')
       }
-      alert('Envia') 
     } catch (err) {
-      console.error(err)
-    }
+        console.log(err)
+   } 
   }
 
-  function handleChange (e) {
-    setform({...form, [e.target.name]: e.target.value})
-    console.log(form)
-  }
 
-  const validadorInput = () => {
-    return validarSenha(form.password)
+  function handleChange(e) {
+    setValues({ ...values, [e.target.name]: e.target.value})
+    
   }
-
-  console.log(validadorInput())
 
   return (
     <div className='login-screen '>
       <h1>Login</h1>
-      <form onSubmit={handleLogin}>
+
+
+
+
+      
+      <form onSubmit={handleSubmit}>
         <Input
           text='Usuario'
           type='text'
-          name='usuario'
+          name='username'
           placeholder='Digite o seu usuario'
           onChange={handleChange}
         />
@@ -57,7 +53,7 @@ function Login() {
           onChange={handleChange}
         />
         <Submit text='Entrar' />
-      </form>
+  </form>
        
     </div>
   )

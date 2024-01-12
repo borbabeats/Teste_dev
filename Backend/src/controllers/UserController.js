@@ -1,4 +1,5 @@
 const database = require('../database/connection')
+const bcrypt = require('bcryptjs')
 
 class UserController {
     novoUsuario(request, response) {
@@ -7,13 +8,63 @@ class UserController {
 
     console.log(username, password)
 
-    database.insert({username, password}).table('users').then(data=>{
-        console.log(data)
-        response.json({message:'Usuario criado com sucesso!'})
-    }).catch(error=>{
-        console.error(error)
-    })
-}
+    //generate a salt to use for hashing
+    bcrypt.genSalt(10, (err, salt) => {
+        if(err) {
+            console.error(err)
+            response.status(500).json({ error: 'Erro ao criar usuario' })
+        }
+
+        //hash the password using the generated salt
+        bcrypt.hash(password, salt, (err, hash) => {
+            if(err) {
+                console.error(err)
+                return response.status(500).json({ error:'Erro ao criar o usuario' })
+            }
+
+            database.insert({ username, password: hash }).table('users').then(data=>{
+                console.log(data)
+                response.json({message:'Usuario criado com sucesso!'})
+            }).catch(error=>{
+                console.error(error)
+                response.status(500).json({ error: 'Erro ao criar usuario' })
+            })
+        })
+
+        })
+    }
+    
+    
+    checkLogin(req, res) {
+        const username = req.body.username;
+        const password = req.body.password;
+
+        database.select('*').table('users').where('username', username).then(data => {
+            if(data.length > 0) {
+                const hashedPassword = data[0].password;
+                bcrypt.compare(password.toString(), hashedPassword, (bcryptErr, response) => {
+                    if (bcryptErr) {
+                        return res.json({ Error: 'Password compare error' });
+                    }
+
+                    if (response) {
+                        return res.json({ Status: 'Success' });
+                    } else {
+                        return res.json({ Error: 'Password not matched' });
+                    }
+                });
+            } else {
+                return res.json({ Error: 'No username exists' });
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            return res.json({ Error: 'Login error in server' });
+        });
+};
+
+
+       
 
     listarUsuarios(request, response) {
         database.select('*').table('users').then((users) => {

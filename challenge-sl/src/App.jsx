@@ -7,18 +7,23 @@ import CadastraPessoa from './Pages/Pessoa.jsx'
 import CadastraProtocolo from './Pages/Protocolo.jsx'
 import Home from './Pages/Home.jsx'
 
+
 function App() {
   return (
     <div className='App'>
     <BrowserRouter>
       <Routes>
-        <Route path='/'  element={<Home/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/dashboardpessoas' element={<PessoasDashboard/>}/>
-        <Route path='/dashboardprotocolo' element={<ProtocolosDashboard/>}/>
-        <Route path='/cadastrapessoa' element={<CadastraPessoa/>}/>
-        <Route path='/cadastraprotocolo' element={<CadastraProtocolo/>}/>
 
+        
+        <Route path='/' element={<Login/>}/>
+        
+       
+          <Route path='/paginainicial'  element={<Home/>}/>
+          <Route path='/dashboardpessoas' element={<PessoasDashboard/>}/>
+          <Route path='/dashboardprotocolo' element={<ProtocolosDashboard/>}/>
+          <Route path='/cadastrapessoa' element={<CadastraPessoa/>}/>
+          <Route path='/cadastraprotocolo' element={<CadastraProtocolo/>}/>
+    
       </Routes>
     </BrowserRouter>
     </div>

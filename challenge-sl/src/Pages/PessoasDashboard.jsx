@@ -71,7 +71,7 @@ function PessoasDashboard() {
                     
                 <LinkButton
                     text='Voltar'
-                    to='/'
+                    to='/paginainicial'
                     color='secondary'
                     icon={<IoMdArrowRoundBack />}
                     />
@@ -89,9 +89,9 @@ function PessoasDashboard() {
                 <Row className='mt-4'>
                     {loading ? (
                         <Col className='d-flex justify-content-center'>
-                        <Spinner type='grow' color="primary m-1"></Spinner>
-                        <Spinner type='grow' color="primary m-1"></Spinner>
-                        <Spinner type='grow' color="primary m-1"></Spinner>
+                        <Spinner type='grow' color="primary" className='m-1'></Spinner>
+                        <Spinner type='grow' color="primary" className='m-1'></Spinner>
+                        <Spinner type='grow' color="primary" className='m-1'></Spinner>
                        
                     </Col>
                     ) : (
