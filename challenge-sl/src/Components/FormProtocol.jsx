@@ -33,7 +33,12 @@ async function handleSubmit(e) {
         const response = await api.post('/protocolos', protocolo)
 
         setModal(true)
-        setProtocolo({ ...protocolo, id: response.data.id })
+        setProtocolo({
+            descricao: '',
+            data_protocolo: '',
+            prazo: '',
+            nome: ''
+        })
     } catch(err) {
         console.error(err)
     }
