@@ -80,7 +80,7 @@ function ProtocolosDashboard() {
                     
                 <LinkButton
                     text='Voltar'
-                    to='/paginainicial'
+                    to='/'
                     color='secondary'
                     icon={<IoMdArrowRoundBack />}
                     />

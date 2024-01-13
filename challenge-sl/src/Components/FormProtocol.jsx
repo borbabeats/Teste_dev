@@ -30,8 +30,7 @@ function handleChange (e) {
 async function handleSubmit(e) {
     e.preventDefault()
     try {
-        const response = await api.post('/protocolos', protocolo)
-
+        await api.post('/protocolos', protocolo)
         setModal(true)
         setProtocolo({
             descricao: '',
@@ -94,7 +93,7 @@ async function getPerson() {
             <Input type='number'
                 name='prazo'
                 placeholder='Sera atendido em ate quantos dias?'
-                max='2'
+                maxlength='2'
                 text='Prazo'
                 onChange={handleChange}
                 required />

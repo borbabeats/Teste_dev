@@ -2,15 +2,15 @@ const express = require('express')
 const cors = require('cors')
 const router = require('./src/routes/routes.js')
 const bodyParser = require('body-parser')
-const jwt = require('jsonwebtoken')
-require('dotenv').config();
-
-
 
 
 const app = express()
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+    origin: ['http://localhost:5173'],
+    methods: ['POST', 'GET', 'DELETE', 'PUT'],
+    credentials: true
+}))
 app.use(router)
 app.use(bodyParser.json())
 

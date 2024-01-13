@@ -71,7 +71,7 @@ function PessoasDashboard() {
                     
                 <LinkButton
                     text='Voltar'
-                    to='/paginainicial'
+                    to='/'
                     color='secondary'
                     icon={<IoMdArrowRoundBack />}
                     />

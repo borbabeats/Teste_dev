@@ -2,7 +2,9 @@ import Card from '../Components/Card'
 import { Container, Col, Row } from 'reactstrap'
 
 function Home() {
+
     return (
+  
         <Container>
             <Row >
                 <Col className='mb-4'>

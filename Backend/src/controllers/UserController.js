@@ -1,5 +1,9 @@
 const database = require('../database/connection')
 const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+
+const jwtToken = process.env.REACT_APP_JWT_SECRET
+
 
 class UserController {
     novoUsuario(request, response) {
@@ -42,12 +46,15 @@ class UserController {
         database.select('*').table('users').where('username', username).then(data => {
             if(data.length > 0) {
                 const hashedPassword = data[0].password;
+              
                 bcrypt.compare(password.toString(), hashedPassword, (bcryptErr, response) => {
                     if (bcryptErr) {
                         return res.json({ Error: 'Password compare error' });
                     }
-
                     if (response) {
+                        const username = data[0].username
+                        const token = jwt.sign({username}, jwtToken, {expiresIn: '1h'})
+                        res.cookie('token', token)
                         return res.json({ Status: 'Success' });
                     } else {
                         return res.json({ Error: 'Password not matched' });

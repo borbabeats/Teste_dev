@@ -38,8 +38,8 @@ function handleChange (e) {
 
 async function handleSubmit(e) {
     e.preventDefault()
-    api.post('/pessoas', pessoa)
-    .then(res => {
+    try {
+        await api.post('/pessoas', pessoa)
         setModal(true)
         setPessoa({
             nome: '',
@@ -54,10 +54,9 @@ async function handleSubmit(e) {
             complemento:''
         })
         
-    })
-    .catch(err => {
+    } catch(err) {
         console.error(err)
-    })
+    }
 }
 
 async function searchGender() {
@@ -71,22 +70,13 @@ async function searchGender() {
     }
 }
 
-function reloadPage () {
-    setTimeout(() => { 
-    window.location.reload()
-   }, 800)
-}
-
-    const closeModalAndReload = () => {
-        setModal(false)
-    }
 
 
     return (
         <Container className='bg-white p-1'>
             <Row> 
                 <Col lg='6'> 
-        <Modal isOpen={modal} toggle={closeModalAndReload} >
+        <Modal isOpen={modal} toggle={toggle} >
             <ModalHeader toggle={toggle} className='bg-info'>Information</ModalHeader>
             <ModalBody color='secondary'>
                 Usuario criado com sucesso!!

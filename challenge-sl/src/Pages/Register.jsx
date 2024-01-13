@@ -6,34 +6,38 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const Login = () => {
+const Register = () => {
    const [values, setValues] = useState([])  
   
-  const navigate = useNavigate()
-  api.defaults.withCredentials = true
-  function handleSubmit(e) {
+    const navigate = useNavigate()
+
+  async function handleSubmit(e) {
     e.preventDefault()
-    api.post('/checklogin', values)
+    if(values.password){
+    api.post('/newusers', values)
     .then(res => {
-      if(res.data.Status === 'Success') {
-        navigate('/')
-      } else {
-        alert('Login failed. Please check your credentials.')
-      }
+        if(res.data.Status === 'Success') {
+            navigate('/')
+        }
     })
     .catch(err => console.log(err))
-  }
+    } else {
+      console.error('Password cannot be empty')
+    }}
+
 
 
   function handleChange(e) {
     setValues({ ...values, [e.target.name]: e.target.value})
+    console.log(values)
   }
+
 
   return (
     <div className='login-screen '>
-      <div className='bg-info border-1'>Usuario: root<br/>Senha: root</div>
-      <h1>Login</h1>
+      <h1>Register</h1>
 
+      
       <form onSubmit={handleSubmit}>
         <Input
           text='Usuario'
@@ -56,4 +60,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Register

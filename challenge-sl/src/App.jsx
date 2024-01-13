@@ -6,6 +6,7 @@ import ProtocolosDashboard from './Pages/ProtocolosDashboard.jsx'
 import CadastraPessoa from './Pages/Pessoa.jsx'
 import CadastraProtocolo from './Pages/Protocolo.jsx'
 import Home from './Pages/Home.jsx'
+import Register from './Pages/Register.jsx'
 
 
 function App() {
@@ -15,10 +16,10 @@ function App() {
       <Routes>
 
         
-        <Route path='/' element={<Login/>}/>
+        <Route path='/login' element={<Login/>}/>
         
-       
-          <Route path='/paginainicial'  element={<Home/>}/>
+          <Route path='/register' element={<Register/>}/>
+          <Route path='/'  element={<Home/>}/>
           <Route path='/dashboardpessoas' element={<PessoasDashboard/>}/>
           <Route path='/dashboardprotocolo' element={<ProtocolosDashboard/>}/>
           <Route path='/cadastrapessoa' element={<CadastraPessoa/>}/>

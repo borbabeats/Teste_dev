@@ -13,6 +13,19 @@
             "database": "dados_usuario",
             "username": "root",
             "password": "root"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "db4free.net",
+            "port": 3306,
+            "driver": "MySQL",
+            "database": "dados_usuario",
+            "username": "borbabeats",
+            "name": "db4free.net"
         }
     ]
 }

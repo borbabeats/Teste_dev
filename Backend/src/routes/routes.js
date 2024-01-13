@@ -3,8 +3,8 @@ const express = require('express')
 const router = express.Router()
 const UserController = require('../controllers/UserController')
 
-router.post('/users', UserController.novoUsuario)
-router.post('/users', UserController.checkLogin)
+router.post('/newusers', UserController.novoUsuario)
+router.post('/checklogin', UserController.checkLogin)
 
 router.post('/pessoas', UserController.cadastraPessoa)
 router.get('/pessoas', UserController.listarPessoas)
