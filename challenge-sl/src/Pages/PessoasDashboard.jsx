@@ -98,11 +98,11 @@ function PessoasDashboard() {
                     </Col>
                     ) : (
                     pessoa.map(p => (
-                        <li className='d-flex flex-row justify-content-between border p-3' key={p.id}>
+                        <li className='d-flex flex-row justify-content-between border p-3 bg-white' key={p.id}>
                             <div>{p.id} - {p.nome}</div>
                             <div className='d-flex flex-row justify-content-between'>
-                                <div className=''><Button className='d-flex flex-row align-items-center bg-warning'><MdOutlineModeEdit /><span className='text-white'>Edit</span></Button></div>
-                                <div className=''><Button className='d-flex flex-row align-items-center bg-danger' onClick={() => openDeleteModal(p.id)}><MdDeleteForever /><span className='text-white'>Delete</span></Button></div>
+                                <div className='me-4'><Button className='d-flex flex-row align-items-center bg-warning border-0'><MdOutlineModeEdit /><span className='text-white'>Edit</span></Button></div>
+                                <div className=''><Button className='d-flex flex-row align-items-center bg-danger border-0' onClick={() => openDeleteModal(p.id)}><MdDeleteForever /><span className='text-white'>Delete</span></Button></div>
                             </div>
                         </li>
                  )))}

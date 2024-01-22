@@ -85,6 +85,10 @@ button:focus-visible {
   font-weight: 600 !important;
 }
 
+.btn-protocol {
+  height: fit-content;
+}
+
 .cards:hover {
   box-shadow: 4px 2px 32px #fffff0;
 }

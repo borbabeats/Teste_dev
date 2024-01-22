@@ -82,7 +82,7 @@ async function getPerson() {
                 rows={10}
                 onChange={handleChange}
                 required />
-
+            <div className='d-flex gap-1 flex-wrap'>
             <Input type='date'
                 name='data_protocolo'
                 placeholder='Insira a data do protocolo:'
@@ -92,22 +92,23 @@ async function getPerson() {
 
             <Input type='number'
                 name='prazo'
-                placeholder='Sera atendido em ate quantos dias?'
+                placeholder='Prazo de atendimento'
                 maxlength='2'
                 text='Prazo'
                 onChange={handleChange}
                 required />
 
-            <Select 
+            <Select className='col-md-12'
                 name='nome'
                 text='Selecione o contribuinte'
                 required={true}
                 onChange={handleChange}
                 options={options}
             /> 
+            </div>
 
 
-            <Submit text='Enviar' />
+            <Submit className='col-md-3' text='Enviar' />
         </form>
         
         

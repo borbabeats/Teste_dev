@@ -1,6 +1,6 @@
 function Select({ text, name, onChange, options, required }) {
     return(
-        <>
+        <div className="d-flex flex-column">
         <label htmlFor={name}>
             {text}
             {required && <span className='text-danger'>*</span>}
@@ -22,7 +22,7 @@ function Select({ text, name, onChange, options, required }) {
                 
           
         </select>
-        </>
+        </div>
     )
 }
 

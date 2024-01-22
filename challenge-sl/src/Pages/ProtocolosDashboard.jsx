@@ -6,6 +6,7 @@ import { SiProtondrive } from "react-icons/si";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
 import { Spinner } from 'reactstrap'
+import { MdOutlineModeEdit } from "react-icons/md";
 
 
 function ProtocolosDashboard() {
@@ -105,14 +106,15 @@ function ProtocolosDashboard() {
                     </Col>
                     ) : (
                     protocolo.map((p) => (
-                        <li className='d-flex justify-content-between border p-3' key={p.id}>
+                        <li className='d-flex justify-content-between border p-3 bg-white' key={p.id}>
                             <div>
                                 <p>Nro do Protocolo <strong>{p.id}</strong></p> 
                                 <p>Data do Registro: <strong>{p.data_protocolo}</strong></p> 
                                 <p>Nome do Contribuinte: <strong>{p.nome}</strong></p>
                             </div>
-                            <div>
-                                <Button className='d-flex flex-row align-items-center bg-danger' onClick={() => openDeleteModal(p.id)}><MdDeleteForever/><span className='text-white'>Delete</span></Button>
+                            <div className='d-flex flex-row justify-content-between'>
+                                <Button className='d-flex flex-row align-items-center me-4 bg-warning btn-protocol border-0'><MdOutlineModeEdit /><span className='text-white'>Edit</span></Button>
+                                <Button className='d-flex flex-row align-items-center bg-danger btn-protocol border-0' onClick={() => openDeleteModal(p.id)}><MdDeleteForever/><span className='text-white'>Delete</span></Button>
                             </div>
 
                         </li>

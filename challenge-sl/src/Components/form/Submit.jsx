@@ -1,7 +1,7 @@
 // eslint-disable-next-line react/prop-types
-function Submit({ text }) {
+function Submit({ text, className }) {
     return (
-        <button>{text}</button>
+        <button className={className}>{text}</button>
     )
 }
 

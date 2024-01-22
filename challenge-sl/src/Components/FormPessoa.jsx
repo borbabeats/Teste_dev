@@ -89,21 +89,18 @@ async function searchGender() {
         
         <form  onSubmit={handleSubmit} className='bg-white'  >
                 <h1>Cadastrar Pessoa</h1>
-            <Input type='text'
+            
+                <Input type='text' 
                 name='nome'
                 placeholder='Insira o nome:'
                 text='Nome'
                 onChange={handleChange}
                 required />
 
-            <Input type='date'
-                name='data_nascimento'
-                placeholder='Insira a data de nascimento:'
-                text='Data de nascimento'
-                onChange={handleChange}
-                required/>
-
-            <Input type='number'
+                
+            
+            <div className='d-flex gap-1 flex-wrap'>
+                <Input type='number'
                 name='cpf'
                 placeholder='Insira somente os nros:'
                 maxlength='11'
@@ -111,48 +108,59 @@ async function searchGender() {
                 onChange={handleChange}
                 required />
 
-            <Select 
+                <Input type='date' className='col-md-12'
+                name='data_nascimento'
+                placeholder='Insira a data de nascimento:'
+                text='Data de nascimento'
+                onChange={handleChange}
+                required/>
+
+                <Select 
                 name='genero'
                 text='Selecione o Genero'
                 required={true}
                 onChange={handleChange}
                 options={genderOptions}
             /> 
+            </div>
+            <div className='d-flex gap-1 flex-wrap'>
+                <Input
+                name='cidade'
+                text='Cidade'
+                onChange={handleChange}
+                />
+                <Input
+                name='bairro'
+                text='Bairro'
+                onChange={handleChange}
+                />
+                <Input 
+                name='estado'
+                text='Estado'
+                onChange={handleChange}
+                />  
+            </div>
             
-            <Input 
-            name='estado'
-            text='Estado'
-            onChange={handleChange}
-            />  
-            <Input
-            name='cidade'
-            text='Cidade'
-            onChange={handleChange}
-            />
-            <Input
-            name='bairro'
-            text='Bairro'
-            onChange={handleChange}
-            />
-            <Input
-            name='logradouro'
-            text='Logradouro'
-            onChange={handleChange}
-            />
-            <Input
-            name='numero'
-            text='Numero'
-            type='number'
-            onChange={handleChange}
-            />
-            <Input
-            name='complemento'
-            text='Complemento'
-            onChange={handleChange}
-            />
+            <div className='d-flex gap-1 flex-wrap'>
+                <Input
+                name='logradouro'
+                text='Logradouro'
+                onChange={handleChange}
+                />
+                <Input 
+                name='numero'
+                text='Numero'
+                type='number'
+                onChange={handleChange}
+                />
+                <Input className='col-sm-12'
+                name='complemento'
+                text='Complemento'
+                onChange={handleChange}
+                />
+            </div>
 
-
-            <Submit text='Enviar' />
+            <Submit className='col-md-3' text='Enviar' />
         </form>
         
         
