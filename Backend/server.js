@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(express.json())
 app.use(cors({
-    origin: ['http://localhost:5173'],
+    origin: ['http://localhost:5000'],
     methods: ['POST', 'GET', 'DELETE', 'PUT'],
     credentials: true
 }))
