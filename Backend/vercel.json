@@ -1,15 +1,11 @@
 {
     "version": 2,
     "builds": [
-        {
-            "src": "*.js",
-            "use": "@vercel/node"
-        }
+      { "src": "challenge-sl/package.json", "use": "@vercel/static-build" },
+      { "src": "Backend/**", "use": "@vercel/node" }
     ],
     "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "/"
-        }
+      { "src": "/api/(.*)", "dest": "backend/$1" },
+      { "src": "/(.*)", "dest": "challenge-sl/$1" }
     ]
-}
+  }

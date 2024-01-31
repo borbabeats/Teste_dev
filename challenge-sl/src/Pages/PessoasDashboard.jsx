@@ -6,7 +6,7 @@ import { IoPersonAddSharp } from "react-icons/io5";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
 import { MdOutlineModeEdit } from "react-icons/md";
-
+import { Link } from 'react-router-dom';
 import { Spinner } from 'reactstrap'
 
 
@@ -26,7 +26,7 @@ function PessoasDashboard() {
 
     async function getPessoas() {
         try {
-            const response = await api.get('/pessoas')
+            const response = await api.get('/api/pessoas')
             setPessoa(response.data)
         } catch (err) {
             console.error('Error fetching pessoas:', err)
@@ -37,7 +37,7 @@ function PessoasDashboard() {
 
     async function deletaPessoa(id) {
         try {
-            await api.delete(`/deleta/pessoa/${id}`)
+            await api.delete(`/api/deleta/pessoa/${id}`)
             getPessoas()
         } catch (error) {
             console.error(error)
@@ -49,6 +49,7 @@ function PessoasDashboard() {
         setDeletePersonId(id)
         setModal(true)
     }
+
     
     
     
@@ -101,7 +102,7 @@ function PessoasDashboard() {
                         <li className='d-flex flex-row justify-content-between border p-3 bg-white' key={p.id}>
                             <div>{p.id} - {p.nome}</div>
                             <div className='d-flex flex-row justify-content-between'>
-                                <div className='me-4'><Button className='d-flex flex-row align-items-center bg-warning border-0'><MdOutlineModeEdit /><span className='text-white'>Edit</span></Button></div>
+                                <div className='me-4'><Link to={`/editarpessoa/${p.id}`} className='border-0'><Button className='d-flex flex-row align-items-center bg-warning border-0'><MdOutlineModeEdit /><span className='text-white'>Edit</span></Button></Link></div>
                                 <div className=''><Button className='d-flex flex-row align-items-center bg-danger border-0' onClick={() => openDeleteModal(p.id)}><MdDeleteForever /><span className='text-white'>Delete</span></Button></div>
                             </div>
                         </li>

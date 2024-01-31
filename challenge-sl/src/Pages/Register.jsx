@@ -14,7 +14,7 @@ const Register = () => {
   async function handleSubmit(e) {
     e.preventDefault()
     if(values.password){
-    api.post('/newusers', values)
+    api.post('/api/newusers', values)
     .then(res => {
         if(res.data.Status === 'Success') {
             navigate('/')

@@ -5,6 +5,7 @@ import Login from './Pages/Login.jsx'
 import ProtocolosDashboard from './Pages/ProtocolosDashboard.jsx'
 import CadastraPessoa from './Pages/Pessoa.jsx'
 import CadastraProtocolo from './Pages/Protocolo.jsx'
+import EditaPessoa from './Pages/EditPessoa.jsx'
 import Home from './Pages/Home.jsx'
 import Register from './Pages/Register.jsx'
 import { useCookies } from "react-cookie"
@@ -32,7 +33,8 @@ function App() {
           <Route path='/dashboardprotocolo' element={isAuthenticated ? <ProtocolosDashboard/> : <Navigate to='/login' />}/>
           <Route path='/cadastrapessoa' element={isAuthenticated ? <CadastraPessoa/> : <Navigate to='/login'/>}/>
           <Route path='/cadastraprotocolo' element={isAuthenticated ? <CadastraProtocolo/> : <Navigate to='/login'/>}/>
-    
+          <Route path='/editarpessoa/:id' element={isAuthenticated ? <EditaPessoa/> : <Navigate to='/login' />}/>
+
       </Routes>
     </BrowserRouter>
     </div>

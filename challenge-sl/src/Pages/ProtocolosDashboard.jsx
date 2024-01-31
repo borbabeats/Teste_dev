@@ -24,7 +24,7 @@ function ProtocolosDashboard() {
 
     async function getProtocolos() {
        try {
-        const response = await api.get('/protocolos')
+        const response = await api.get('/api/protocolos')
         const formattedProtocolos = response.data.map(p => ({
             ...p,
             data_protocolo: formatFriendlyDate(new Date(p.data_protocolo)),
@@ -47,7 +47,7 @@ function ProtocolosDashboard() {
 
     async function deletaProtocolo(id) {
         try {
-            await api.delete(`/deleta/protocolo/${id}`)
+            await api.delete(`/api/deleta/protocolo/${id}`)
             getProtocolos()
         } catch (error) {
             console.error(error)

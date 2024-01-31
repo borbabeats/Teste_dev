@@ -1,23 +1,21 @@
 const express = require('express')
+const app = express()
 const cors = require('cors')
 const router = require('./src/routes/routes.js')
-const bodyParser = require('body-parser')
+const port = 5000
 
-
-const app = express()
-app.use(express.json())
 app.use(cors({
     origin: ['http://localhost:5173'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Custom-Header'],
     methods: ['POST', 'GET', 'DELETE', 'PUT'],
     credentials: true
 }))
+
+
+app.use(express.json())
 app.use(router)
-app.use(bodyParser.json())
 
 
-
-
-app.listen(5000, () => {
+app.listen(port, () => {
     console.log('Aplicacao rodando na porta 5000')
 })

@@ -119,6 +119,15 @@ class UserController {
         })
     }
 
+    listarUmaPessoa(req, res) {
+        const { id } = req.params
+        database.select('*').table('pessoas').where({ id:id }).then(data=>{
+            res.json(data)
+        }).catch(err => {
+            console.error(err)
+        })
+    }
+
     deletarPessoa(req, res) {
         const id = req.params.id
 
@@ -133,6 +142,18 @@ class UserController {
         })
     }
 
+    atualizaPessoa(req, res) {
+        const id = req.params
+        const {nome, data_nascimento, cpf, genero, estado, cidade, bairro, logradouro, numero, complemento} = req.body
+
+        database.where({ id:id }).update({nome, data_nascimento, cpf, genero, estado, cidade, bairro, logradouro, numero, complemento})
+        .table('pessoas').then(data=>{
+            res.json({message:'Pessoa atualizada com sucesso'}) //verificar se eh response o res
+        }).catch(err=>{
+            response.json(err)
+        })
+    }
+
     novoProtocolo(req, res) {
         const {descricao, data_protocolo, prazo, nome} = req.body
 
@@ -143,13 +164,35 @@ class UserController {
         }).catch(err => {
             console.error(err)
         })
-
     }
 
     listarProtocolos(req, res){
         database.select('*').table('protocolos').then(data => {
             console.log(data)
             res.json(data)
+        }).catch(err => {
+            console.error(err)
+        })
+    }
+
+    listarUmProtocolo(req, res) {
+        const { id } = req.params
+        database.select('*').table('protocolos').where({ id:id }).then(data=>{
+            res.json(data)
+        }).catch(err => {
+            console.error(err)
+        })
+    }
+
+    atualizarProtocolo(req, res) {
+        const id = req.params
+        const {descricao, data_protocolo, prazo, nome} = req.body
+
+
+        database.where({ id:id }).update({descricao, data_protocolo, prazo, nome})
+        .table('protocolos').then(data => {
+            console.log(data)
+            res.json({message: 'Protocolo preenchido com sucesso!'})
         }).catch(err => {
             console.error(err)
         })

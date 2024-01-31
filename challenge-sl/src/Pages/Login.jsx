@@ -13,7 +13,7 @@ const Login = () => {
   api.defaults.withCredentials = true
   function handleSubmit(e) {
     e.preventDefault()
-    api.post('/checklogin', values)
+    api.post('/api/checklogin', values)
     .then(res => {
       if(res.data.Status === 'Success') {
         navigate('/')

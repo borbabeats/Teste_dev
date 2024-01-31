@@ -39,7 +39,7 @@ function handleChange (e) {
 async function handleSubmit(e) {
     e.preventDefault()
     try {
-        await api.post('/pessoas', pessoa)
+        await api.post('/api/pessoas', pessoa)
         setModal(true)
         setPessoa({
             nome: '',
@@ -61,7 +61,7 @@ async function handleSubmit(e) {
 
 async function searchGender() {
     try {
-         await api.get('/genero')
+         await api.get('/api/genero')
         .then(res => {
             setGenderOptions(res.data)
         }) 

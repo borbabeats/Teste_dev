@@ -30,7 +30,7 @@ function handleChange (e) {
 async function handleSubmit(e) {
     e.preventDefault()
     try {
-        await api.post('/protocolos', protocolo)
+        await api.post('/api/protocolos', protocolo)
         setModal(true)
         setProtocolo({
             descricao: '',
@@ -49,7 +49,7 @@ useEffect(() => {
 
 async function getPerson() {
     try {
-        const response = await api.get('/pessoas')
+        const response = await api.get('/api/pessoas')
         setOptions(response.data)
     } catch (err) {
         console.error('Error fetching people:', err)
