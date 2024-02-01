@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(express.json())
 app.use(cors({
-    origin: ['http://localhost:5173'],
+    origin: ['https://teste-dev-client-side.vercel.app'],
     methods: ['POST', 'GET', 'DELETE', 'PUT'],
     credentials: true
 }))
