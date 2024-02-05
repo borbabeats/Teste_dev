@@ -1,15 +1,16 @@
 const express = require('express')
 const cors = require('cors')
-const app = express()
+
 
 const router = require('./src/routes/routes.js')
 app.use(router)
 
+const app = express()
 app.use(cors({
     origin: 'https://crud-example-d15v.onrender.com',
     methods: ['POST', 'GET', 'DELETE', 'PUT'],
     allowedHeaders:'*',
-    maxAge: 86400,
+    maxAge: 6400,
     credentials: true
 }))
 
