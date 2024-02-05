@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const app = express()
 app.use(express.json())
 app.use(cors({
-    origin: ['https://teste-dev-client-side.onrender.com'],
+    origin: ['https://crud-example-d15v.onrender.com'],
     methods: ['POST', 'GET', 'DELETE', 'PUT'],
     credentials: true
 }))
