@@ -6,7 +6,7 @@ const router = require('./src/routes/routes.js')
 
 app.use(router)
 app.use(cors({
-    origin: 'https://crud-example-d15v.onrender.com',
+    origin: 'https://cadastros-client-side.onrender.com',
     methods: ['POST', 'GET', 'DELETE', 'PUT'],
     allowedHeaders:'*',
     maxAge: 86400,
