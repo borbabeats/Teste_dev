@@ -13,9 +13,9 @@ app.use(cors({
     credentials: true
 }))
 
-app.use('/api',router)
+app.use(router)
 
-app.options('*', cors())
+//app.options('*', cors())
 
 app.use(express.json())
 
