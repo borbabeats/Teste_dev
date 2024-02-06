@@ -3,9 +3,10 @@ const cors = require('cors')
 
 
 const router = require('./src/routes/routes.js')
-app.use(router)
+
 
 const app = express()
+app.use(router)
 app.use(cors({
     origin: 'https://crud-example-d15v.onrender.com',
     methods: ['POST', 'GET', 'DELETE', 'PUT'],
