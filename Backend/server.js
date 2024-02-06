@@ -12,6 +12,7 @@ app.use(cors({
     maxAge: 86400,
     credentials: true
 }))
+app.options('*', cors())
 
 app.use(express.json())
 
