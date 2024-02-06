@@ -1,11 +1,9 @@
 const express = require('express')
 const cors = require('cors')
-
+const app = express()
 
 const router = require('./src/routes/routes.js')
 
-
-const app = express()
 app.use(router)
 app.use(cors({
     origin: 'https://crud-example-d15v.onrender.com',
