@@ -16,6 +16,6 @@ app.use(cors({
 app.use(express.json())
 
 
-app.listen(5000, () => {
+app.listen(4000, () => {
     console.log('Aplicacao rodando na porta 5000')
 })
