@@ -10,7 +10,7 @@ app.use(cors({
     origin: 'https://crud-example-d15v.onrender.com',
     methods: ['POST', 'GET', 'DELETE', 'PUT'],
     allowedHeaders:'*',
-    maxAge: 6400,
+    maxAge: 86400,
     credentials: true
 }))
 
