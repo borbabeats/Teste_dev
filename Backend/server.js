@@ -19,9 +19,9 @@ app.use(router)
 //Enable pre-flight requests
 app.options('*', cors())
 
-const PORT = process.env.PORT || 443
 
 
-app.listen(PORT, () => {
-    console.log('Aplicacao rodando na porta ${PORT}')
+
+app.listen(80, () => {
+    console.log('Aplicacao rodando na porta 80')
 })
