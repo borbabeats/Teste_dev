@@ -11,15 +11,11 @@ app.use(cors({
     maxAge: 86400,
     credentials: true
 }))
-app.get('/', (req, res) => {
-    // Set cookie for the root route
-    res.cookie('cookieName', 'cookieValue', { sameSite: 'none', secure: true });
-    res.send('Cookie set successfully!'); // Send a response to indicate that the cookie has been set
-});
-/*app.use((req, res, next) => {
+
+app.use((req, res, next) => {
     res.setHeader('Set-Cookie', 'SameSite=None; Secure'); 
     next();
-});*/
+});
 
 app.use(express.json())
 app.use(router)
