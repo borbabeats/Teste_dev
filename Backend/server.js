@@ -12,10 +12,10 @@ app.use(cors({
     credentials: true
 }))
 
-app.use((req, res, next) => {
+/*app.use((req, res, next) => {
     res.setHeader('Set-Cookie', 'SameSite=None; Secure'); 
     next();
-});
+});*/
 
 app.use(express.json())
 app.use(router)
