@@ -11,13 +11,13 @@ const Login = () => {
    const [values, setValues] = useState([])  
  
   const navigate = useNavigate()
-  api.defaults.withCredentials = true
+  //api.defaults.withCredentials = true
   function handleSubmit(e) {
     e.preventDefault()
-    api.post('/api/checklogin', values)
+    api.post('/api/checklogin', values, { withCredentials: true })
     .then(res => {
-      if(res.data.Status === 'Success') {
-        navigate('/')
+      if(res.data && res.data.Status === 'Success') {
+        navigate('/', { replace: true })
       } else {
         alert('Login failed. Please check your credentials.')
       }
