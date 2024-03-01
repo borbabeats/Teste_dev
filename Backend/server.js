@@ -6,9 +6,9 @@ const router = require('./src/routes/routes.js')
 
 
 app.use(cors({
-    origin: ['https://cadastros-client-side.onrender.com', 'https://teste-dev-pi.vercel.app'],
+    origin: ['https://teste-dev-pi.vercel.app', 'http://localhost:5173' ],
     methods: ['POST', 'GET', 'DELETE', 'PUT'],
-    allowedHeaders:['Content-Type', 'Authorization', 'Accept', 'Accept-Language', 'Content-Language', '*'],
+    allowedHeaders:['*'],
     maxAge: 86400,
     credentials: true
 }))
