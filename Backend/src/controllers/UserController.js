@@ -54,7 +54,7 @@ class UserController {
                     if (response) {
                         const username = data[0].username
                         const token = jwt.sign({username}, jwtToken, {expiresIn: '1h'})
-                        res.cookie('token', token)
+                        res.cookie('token', token, { httpOnly: true, sameSite: 'None', secure: true });
                         return res.json({ Status: 'Success' });
                     } else {
                         return res.json({ Error: 'Password not matched' });
