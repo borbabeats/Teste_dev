@@ -8,9 +8,9 @@ const app = express()
 
 app.use(cors({
     origin: ['https://teste-dev-pi.vercel.app', 'http://localhost:5173' ],
-    methods: ['POST', 'GET', 'DELETE', 'PUT'],
-    allowedHeaders:['Content-Type', 'Authorization', 'Accept', 'Accept-Language', 'Content-Language', '*'],
-    maxAge: 1,
+    methods: ['POST', 'GET', 'DELETE', 'PUT', 'OPTIONS'],
+    allowedHeaders:['Content-Type', 'Authorization', 'Accept', 'Accept-Language', 'Content-Language', 'X-Requested-with'],
+    maxAge: 86400,
     credentials: true
 }))
 
