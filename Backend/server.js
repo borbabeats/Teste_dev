@@ -20,6 +20,6 @@ app.use((req, res, next) => {
 app.use(express.json())
 app.use(router)
 
-app.listen(80, () => {
-    console.log('Aplicacao rodando na porta 80')
+app.listen(443, () => {
+    console.log('Aplicacao rodando na porta 443')
 })
