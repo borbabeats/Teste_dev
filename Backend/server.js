@@ -5,7 +5,7 @@ const router = require('./src/routes/routes.js')
 const app = express()
 
 app.use(cors({
-    origin: ['https://teste-dev-pi.vercel.app', 'http://localhost:5173' ],
+    origin: ['https://teste-dev-pi.vercel.app'],
     methods: ['POST', 'GET', 'DELETE', 'PUT', 'OPTIONS'],
     allowedHeaders:['Content-Type', 'Authorization', 'Accept', 'Accept-Language', 'Content-Language', 'X-Requested-with'],
     maxAge: 86400,
@@ -13,7 +13,7 @@ app.use(cors({
 }))
 
 app.use((req, res, next) => {
-    res.setHeader('Set-Cookie', 'SameSite=None; Secure'); // Setting SameSite to None and Secure for cross-site cookies
+    res.setHeader('Set-Cookie', 'SameSite=None; Secure'); 
     next();
 });
 
