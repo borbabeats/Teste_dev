@@ -1,25 +1,28 @@
 const express = require('express')
 const cors = require('cors')
-const app = express()
-
 const router = require('./src/routes/routes.js')
+
+
+const app = express()
 
 
 app.use(cors({
     origin: ['https://teste-dev-pi.vercel.app', 'http://localhost:5173' ],
     methods: ['POST', 'GET', 'DELETE', 'PUT'],
-    allowedHeaders:['*'],
+    allowedHeaders:['Content-Type', 'Authorization', 'Accept', 'Accept-Language', 'Content-Language', '*'],
     maxAge: 86400,
     credentials: true
 }))
 
+app.use(express.json())
 app.use(router)
 
-//app.options('*', cors())
+//Enable pre-flight requests
+app.options('*', cors())
 
-app.use(express.json())
 
 
-app.listen(8080, () => {
-    console.log('Aplicacao rodando na porta 8080')
+
+app.listen(80, () => {
+    console.log('Aplicacao rodando na porta 80')
 })
