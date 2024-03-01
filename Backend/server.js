@@ -10,7 +10,7 @@ app.use(cors({
     origin: ['https://teste-dev-pi.vercel.app', 'http://localhost:5173' ],
     methods: ['POST', 'GET', 'DELETE', 'PUT'],
     allowedHeaders:['Content-Type', 'Authorization', 'Accept', 'Accept-Language', 'Content-Language', '*'],
-    maxAge: 86400,
+    maxAge: 1,
     credentials: true
 }))
 
