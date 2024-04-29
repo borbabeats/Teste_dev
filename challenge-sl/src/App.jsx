@@ -17,7 +17,7 @@ function App() {
   const [cookies] = useCookies(['token'])
 
   const isAuthenticated = !!cookies.token
-  console.log('auth', isAuthenticated)
+
   return (
 
     <div className='App'>
