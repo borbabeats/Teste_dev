@@ -14,10 +14,10 @@ import { useCookies } from "react-cookie"
 
 function App() {
 
-  const [cookies, setCookie] = useCookies(['token'])
+  const [cookies] = useCookies(['token'])
 
   const isAuthenticated = !!cookies.token
-
+  console.log('auth', isAuthenticated)
   return (
 
     <div className='App'>

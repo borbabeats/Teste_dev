@@ -1,10 +1,12 @@
+const dotenv = require('dotenv')
 const database = require('../database/connection')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+dotenv.config()
 
 const jwtToken = process.env.REACT_APP_JWT_SECRET
 
-
+console.log('jwttoken', jwtToken)
 class UserController {
     novoUsuario(request, response) {
 
@@ -55,7 +57,7 @@ class UserController {
                         const username = data[0].username
                         const token = jwt.sign({username}, jwtToken, {expiresIn: '1h'})
                         res.cookie('token', token, { httpOnly: true, sameSite: 'None', secure: true });
-                        return res.json({ Status: 'Success' });
+                        return res.json({ Status: token });
                     } else {
                         return res.json({ Error: 'Password not matched' });
                     }
@@ -70,7 +72,7 @@ class UserController {
         });
 };
 
-    verifyToken(req, res, next) {
+    /*verifyToken(req, res, next) {
         const token = req.cookies.token
 
         if(!token) {
@@ -84,7 +86,7 @@ class UserController {
             req.user = decoded
             next()
         })
-    }
+    }*/
        
 
     listarUsuarios(request, response) {

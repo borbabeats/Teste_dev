@@ -3,23 +3,28 @@ import Input from '../Components/form/Input';
 import Submit from '../Components/form/Submit';
 import api from '../Services/Api'
 import { useNavigate } from 'react-router-dom';
-
-
-
+import { useCookies } from 'react-cookie';
 
 const Login = () => {
-   const [values, setValues] = useState([])  
- 
+  const [values, setValues] = useState([]) 
+  const [cookies, setCookies] = useCookies(['token'])
+
   const navigate = useNavigate()
+
   api.defaults.withCredentials = true
  
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       const res = await api.post('/api/checklogin', values);
-      console.log('resposta', res);
-      if (res.data && res.data.Status === 'Success') {
-        navigate('/', { replace: true });
+      if (res.data.Status) {
+        const myToken = res.data.Status
+        setCookies('token', myToken, { path: '/' } )
+        
+        navigate('/');
+        
+        // Adicionando ponto de depuração para verificar se o cookie 'token' está sendo definido corretamente
+        
       } else {
         alert('Login failed. Please check your credentials.');
       }
@@ -27,7 +32,6 @@ const Login = () => {
       console.error(err);
     }
   }
-
 
   function handleChange(e) {
     setValues({ ...values, [e.target.name]: e.target.value})
@@ -54,8 +58,7 @@ const Login = () => {
           onChange={handleChange}
         />
         <Submit text='Entrar' />
-  </form>
-       
+      </form>
     </div>
   )
 }
