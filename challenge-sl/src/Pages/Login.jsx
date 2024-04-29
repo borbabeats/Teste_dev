@@ -7,7 +7,7 @@ import { useCookies } from 'react-cookie';
 
 const Login = () => {
   const [values, setValues] = useState([]) 
-  const [cookies, setCookies] = useCookies(['token'])
+  const [cookies, setCookie] = useCookies(['token'])
   console.log('cookies', cookies)
   const navigate = useNavigate()
 
@@ -20,12 +20,10 @@ const Login = () => {
       if (res.data.Status !== '') {
         const myToken = res.data.Status
         console.log('myToken', myToken)
-        setCookies('token', myToken, { path: '/' } )
+        setCookie('token', myToken, { path: '/' } )
         
         navigate('/');
-        
-        // Adicionando ponto de depuração para verificar se o cookie 'token' está sendo definido corretamente
-        
+
       } else {
         alert('Login failed. Please check your credentials.');
       }
