@@ -5,7 +5,7 @@ const router = require('./src/routes/routes.js')
 const app = express()
 
 app.use(cors({
-    origin: ['https://teste-dev-pi.vercel.app'],
+    origin: ['https://teste-dev-pi.vercel.app', 'https://localhost:5173'],
     methods: ['POST', 'GET', 'DELETE', 'PUT', 'OPTIONS'],
     allowedHeaders:['Content-Type', 'Authorization', 'Accept', 'Accept-Language', 'Content-Language', 'X-Requested-with'],
     maxAge: 86400,

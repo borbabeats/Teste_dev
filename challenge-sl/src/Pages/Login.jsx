@@ -12,17 +12,20 @@ const Login = () => {
  
   const navigate = useNavigate()
   api.defaults.withCredentials = true
-  function handleSubmit(e) {
-    e.preventDefault()
-    api.post('/api/checklogin', values)
-    .then(res => {
-      if(res.data && res.data.Status === 'Success') {
-        navigate('/', { replace: true })
+ 
+  async function handleSubmit(e) {
+    e.preventDefault();
+    try {
+      const res = await api.post('/api/checklogin', values);
+      console.log('resposta', res);
+      if (res.data && res.data.Status === 'Success') {
+        navigate('/', { replace: true });
       } else {
-        alert('Login failed. Please check your credentials.')
+        alert('Login failed. Please check your credentials.');
       }
-    })
-    .catch(err => console.log(err))
+    } catch (err) {
+      console.error(err);
+    }
   }
 
 
