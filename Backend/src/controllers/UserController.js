@@ -6,7 +6,7 @@ dotenv.config()
 
 const jwtToken = process.env.REACT_APP_JWT_SECRET
 
-console.log('jwttoken', jwtToken)
+
 class UserController {
     novoUsuario(request, response) {
 
@@ -72,7 +72,7 @@ class UserController {
         });
 };
 
-    /*verifyToken(req, res, next) {
+    verifyToken(req, res, next) {
         const token = req.cookies.token
 
         if(!token) {
@@ -86,7 +86,7 @@ class UserController {
             req.user = decoded
             next()
         })
-    }*/
+    }
        
 
     listarUsuarios(request, response) {
