@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 const Login = () => {
   const [values, setValues] = useState([]) 
   const [cookies, setCookies] = useCookies(['token'])
-
+  console.log('cookies', cookies)
   const navigate = useNavigate()
 
   api.defaults.withCredentials = true
@@ -17,8 +17,9 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await api.post('/api/checklogin', values);
-      if (res.data.Status) {
+      if (res.data.Status !== '') {
         const myToken = res.data.Status
+        console.log('myToken', myToken)
         setCookies('token', myToken, { path: '/' } )
         
         navigate('/');
