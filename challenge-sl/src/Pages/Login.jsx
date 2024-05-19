@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 
 const Login = () => {
-  const [values, setValues] = useState([]) 
+  const [values, setValues] = useState({}) 
   const [cookies, setCookie] = useCookies(['token'])
-  //console.log('cookies', cookies)
+
   const navigate = useNavigate()
 
   api.defaults.withCredentials = true
@@ -17,13 +17,14 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await api.post('/api/checklogin', values);
-      if (res.data.Status !== '') {
+      if (res.data.Status) {
         const myToken = res.data.Status
-        console.log('myToken', myToken)
         setCookie('token', myToken, { path: '/' } )
         setTimeout(() => {
           navigate('/');
-      }, 300)
+        }, 300)
+        // Adicionando ponto de depuração para verificar se o cookie 'token' está sendo definido corretamente
+        
       } else {
         alert('Login failed. Please check your credentials.');
       }
