@@ -41,7 +41,7 @@ class UserController {
     }
     
     
-    const checkLogin = (req, res) => {
+    checkLogin(req, res) {
         const { username, password } = req.body;
         
         console.log('Received login request for username:', username); // Debugging log
