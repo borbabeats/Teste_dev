@@ -17,8 +17,9 @@ const Login = () => {
     e.preventDefault();
     try {
       const res = await api.post('/api/checklogin', values);
+      console.log(res.data)
       if (res.data.Status) {
-        console.log(res.data)
+        
         const myToken = res.data.Status
         setCookie('token', myToken, { path: '/' } )
         setTimeout(() => {
