@@ -15,12 +15,16 @@ const Login = () => {
  
   async function handleSubmit(e) {
     e.preventDefault();
+    console.log('handleSubmit triggered'); // Log to ensure the function is called
+  
     try {
+      console.log('Form values:', values); // Log form values
+  
       // Send POST request to the login endpoint with the form values
       const res = await api.post('/api/checklogin', values);
-      
+  
       // Log the response data for debugging
-      console.log('Response data:', res.data); 
+      console.log('Response data:', res.data);
   
       // Check if login was successful
       if (res.data.Status && res.data.Status !== '') {

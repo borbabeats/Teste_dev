@@ -41,36 +41,39 @@ class UserController {
     }
     
     
-    checkLogin(req, res) {
-        const username = req.body.username;
-        const password = req.body.password;
-
+    const checkLogin = (req, res) => {
+        const { username, password } = req.body;
+        
+        console.log('Received login request for username:', username); // Debugging log
+    
         database.select('*').table('users').where('username', username).then(data => {
-            if(data.length > 0) {
+            if (data.length > 0) {
                 const hashedPassword = data[0].password;
-              
+    
                 bcrypt.compare(password.toString(), hashedPassword, (bcryptErr, response) => {
                     if (bcryptErr) {
+                        console.error('Bcrypt error:', bcryptErr); // Debugging log
                         return res.json({ Error: 'Password compare error' });
                     }
                     if (response) {
-                        const username = data[0].username
-                        const token = jwt.sign({username}, jwtToken, {expiresIn: '1h'})
+                        const token = jwt.sign({ username }, jwtToken, { expiresIn: '1h' });
                         res.cookie('token', token, { httpOnly: true, sameSite: 'None', secure: true });
+                        console.log('Login successful, token generated:', token); // Debugging log
                         return res.json({ Status: token });
                     } else {
+                        console.log('Password not matched for username:', username); // Debugging log
                         return res.json({ Error: 'Password not matched' });
                     }
                 });
             } else {
+                console.log('No user found with username:', username); // Debugging log
                 return res.json({ Error: 'No username exists' });
             }
-        })
-        .catch(err => {
-            console.error(err);
+        }).catch(err => {
+            console.error('Database error:', err); // Debugging log
             return res.json({ Error: 'Login error in server' });
         });
-};
+    };
 
     verifyToken(req, res, next) {
         const token = req.cookies.token
