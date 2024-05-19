@@ -16,22 +16,31 @@ const Login = () => {
   async function handleSubmit(e) {
     e.preventDefault();
     try {
+      // Send POST request to the login endpoint with the form values
       const res = await api.post('/api/checklogin', values);
-      console.log(res.data)
-      if (res.data.Status) {
-        
-        const myToken = res.data.Status
-        setCookie('token', myToken, { path: '/' } )
+      
+      // Log the response data for debugging
+      console.log('Response data:', res.data); 
+  
+      // Check if login was successful
+      if (res.data.Status && res.data.Status !== '') {
+        const myToken = res.data.Status;
+        console.log('Token received:', myToken); // Debugging: log the received token
+  
+        // Set the token in cookies
+        setCookie('token', myToken, { path: '/' });
+  
+        // Delay navigation by 300ms to ensure cookie is set
         setTimeout(() => {
           navigate('/');
-        }, 300)
-        // Adicionando ponto de depuração para verificar se o cookie 'token' está sendo definido corretamente
-        
+        }, 300);
       } else {
+        // Log the response data to understand why it failed
+        console.log('Login failed response:', res.data);
         alert('Login failed. Please check your credentials.');
       }
     } catch (err) {
-      console.error(err);
+      console.error('Login error:', err); // Enhanced error logging
     }
   }
 
