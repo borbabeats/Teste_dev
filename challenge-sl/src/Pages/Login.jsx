@@ -43,7 +43,7 @@ const Login = () => {
         // Delay navigation by 300ms to ensure cookie is set
         setTimeout(() => {
           navigate('/');
-        }, 300);
+        }, 3000);
       } else {
         // Log the response data to understand why it failed
         console.log('Login failed response:', data);
