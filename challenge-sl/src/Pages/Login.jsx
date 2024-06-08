@@ -15,23 +15,29 @@ const Login = () => {
  
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log('handleSubmit triggered'); // Log to ensure the function is called
   
     try {
-      console.log('Form values:', values); // Log form values
+   
+      // Enviar solicitação POST para o endpoint de login com os valores do formulário
+      const res = await fetch('https://teste-dev-server-side.onrender.com/api/checklogin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+        credentials: 'include', // Inclui cookies na solicitação
+      });
   
-      // Send POST request to the login endpoint with the form values
-      const res = await api.post('/api/checklogin', values);
+      // Converter a resposta para JSON
+      const data = await res.json();
+      console.log('Response data:', data);
   
-      // Log the response data for debugging
-      console.log('Response data:', res.data);
-  
-      // Check if login was successful
-      if (res.data.Status && res.data.Status !== '') {
-        const myToken = res.data.Status;
+      // Verificar se o login foi bem-sucedido
+      if (data.Status && data.Status !== '') {
+        const myToken = data.Status;
         console.log('Token received:', myToken); // Debugging: log the received token
   
-        // Set the token in cookies
+        // Definir o token nos cookies
         setCookie('token', myToken, { path: '/' });
   
         // Delay navigation by 300ms to ensure cookie is set
@@ -40,7 +46,7 @@ const Login = () => {
         }, 300);
       } else {
         // Log the response data to understand why it failed
-        console.log('Login failed response:', res.data);
+        console.log('Login failed response:', data);
         alert('Login failed. Please check your credentials.');
       }
     } catch (err) {
