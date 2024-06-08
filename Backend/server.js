@@ -5,7 +5,7 @@ const router = require('./src/routes/routes.js')
 const app = express()
 
 app.use(cors({
-    origin: 'https://cadastros-client-side.onrender.com', // https://teste-dev-pi.vercel.app
+    origin: '*',
     methods: ['POST', 'GET', 'DELETE', 'PUT', 'OPTIONS'],
     allowedHeaders:['Content-Type', 'Authorization', 'Accept', 'Accept-Language', 'Content-Language', 'X-Requested-with'],
     maxAge: 86400,
