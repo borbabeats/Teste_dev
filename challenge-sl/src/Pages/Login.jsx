@@ -40,17 +40,17 @@ const Login = () => {
         // Definir o token nos cookies
         setCookie('token', myToken, { path: '/' });
   
-        // Delay navigation by 300ms to ensure cookie is set
+        // Delay navigation by 9000ms to ensure cookie is set
         setTimeout(() => {
           navigate('/');
-        }, 3000);
+        }, 9000);
       } else {
         // Log the response data to understand why it failed
         console.log('Login failed response:', data);
-        alert('Login failed. Please check your credentials.');
+        alert('Erro no login. Por favor, verifique suas credenciais');
       }
     } catch (err) {
-      console.error('Login error:', err); // Enhanced error logging
+      console.error('Erro no login:', err); // Enhanced error logging
     }
   }
 
