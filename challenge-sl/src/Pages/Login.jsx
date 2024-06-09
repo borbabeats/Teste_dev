@@ -19,7 +19,7 @@ const Login = () => {
     try {
    
       // Enviar solicitação POST para o endpoint de login com os valores do formulário
-      const res = await fetch('http://localhost:4000/api/checklogin', { //'https://teste-dev-server-side.onrender.com/api/checklogin'
+      const res = await fetch('https://teste-dev-server-side.onrender.com/api/checklogin', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
