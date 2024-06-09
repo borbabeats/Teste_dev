@@ -19,13 +19,13 @@ const Login = () => {
     try {
    
       // Enviar solicitação POST para o endpoint de login com os valores do formulário
-      const res = await fetch('https://teste-dev-server-side.onrender.com/api/checklogin', {
+      const res = await fetch('http://localhost:4000/api/checklogin', { //'https://teste-dev-server-side.onrender.com/api/checklogin'
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(values),
-        credentials: 'include', // Inclui cookies na solicitação
+        //credentials: 'include', // Inclui cookies na solicitação
       });
   
       // Converter a resposta para JSON
@@ -35,15 +35,13 @@ const Login = () => {
       // Verificar se o login foi bem-sucedido
       if (data.Status && data.Status !== '') {
         const myToken = data.Status;
-        console.log('Token received:', myToken); // Debugging: log the received token
   
         // Definir o token nos cookies
-        setCookie('token', myToken, { path: '/' });
-  
-        // Delay navigation by 9000ms to ensure cookie is set
-        setTimeout(() => {
+        localStorage.setItem('token', myToken);
+        console.log('Token recebido e salvo', myToken)
+
           navigate('/');
-        }, 9000);
+        
       } else {
         // Log the response data to understand why it failed
         console.log('Login failed response:', data);

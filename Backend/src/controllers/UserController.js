@@ -53,25 +53,24 @@ class UserController {
                 bcrypt.compare(password.toString(), hashedPassword, (bcryptErr, response) => {
                     if (bcryptErr) {
                         console.error('Bcrypt error:', bcryptErr); // Debugging log
-                        return res.json({ Error: 'Password compare error' });
+                        return res.status(500).json({ Error: 'Password compare error' });
                     }
                     if (response) {
                         const token = jwt.sign({ username }, jwtToken, { expiresIn: '1h' });
-                        res.cookie('token', token, { httpOnly: true, sameSite: 'None', secure: true });
                         console.log('Login successful, token generated:', token); // Debugging log
                         return res.json({ Status: token });
                     } else {
                         console.log('Password not matched for username:', username); // Debugging log
-                        return res.json({ Error: 'Password not matched' });
+                        return res.status(401).json({ Error: 'Password not matched' });
                     }
                 });
             } else {
                 console.log('No user found with username:', username); // Debugging log
-                return res.json({ Error: 'No username exists' });
+                return res.status(404).json({ Error: 'No username exists' });
             }
         }).catch(err => {
             console.error('Database error:', err); // Debugging log
-            return res.json({ Error: 'Login error in server' });
+            return res.status(500).json({ Error: 'Login error in server' });
         });
     };
 

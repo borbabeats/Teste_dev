@@ -8,15 +8,15 @@ import CadastraProtocolo from './Pages/Protocolo.jsx'
 import EditaPessoa from './Pages/EditPessoa.jsx'
 import Home from './Pages/Home.jsx'
 import Register from './Pages/Register.jsx'
-import { useCookies } from "react-cookie"
+//import { useCookies } from "react-cookie"
 
 
 
 function App() {
 
-  const [cookies] = useCookies(['token'])
-
-  const isAuthenticated = !!cookies.token
+  //const [cookies] = useCookies(['token'])
+  const isAuthenticated = !! localStorage.getItem('token')
+  //const isAuthenticated = !!cookies.token
 
   return (
 
