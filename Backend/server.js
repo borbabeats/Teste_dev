@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const router = require('./src/routes/routes.js')
+const port = 10000
 
 const app = express()
 
@@ -15,6 +16,6 @@ app.use(cors({
 app.use(express.json())
 app.use(router)
 
-app.listen(443, () => {
-    console.log('Aplicacao rodando na porta 443')
+app.listen(port, () => {
+    console.log(`Aplicacao rodando na porta ${port}`)
 })
