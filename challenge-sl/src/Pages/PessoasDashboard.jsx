@@ -65,7 +65,7 @@ function PessoasDashboard() {
             </ModalFooter>
         </Modal>
         
-        <Container className='bg-light border-0 rounded'>
+        <Container>
             <Col>
                 <Row className='p-1'>
                     <h1 className='text-center'>Painel de Controle de Pessoas</h1>
@@ -75,21 +75,21 @@ function PessoasDashboard() {
                 <LinkButton
                     text='Voltar'
                     to='/'
-                    color='btn-secondary'
+                    color='secondary'
                     icon={<IoMdArrowRoundBack />}
                     />
 
                     <LinkButton
                     text='Cadastrar pessoa'
                     to='/cadastrapessoa'
-                    color='btn-info border-0'
+                    color='bg-info'
                     icon={<IoPersonAddSharp />}
                     />
               
                 </Col>
 
                 
-                <Row className='mt-4 rounded'>
+                <Row className='mt-4'>
                     {loading ? (
                         <Col className='d-flex justify-content-center'>
                         <Spinner type='grow' color="primary" className='m-1'></Spinner>
@@ -99,22 +99,11 @@ function PessoasDashboard() {
                     </Col>
                     ) : (
                     pessoa.map(p => (
-                        <li className='d-flex flex-row justify-content-between border p-3 bg-light rounded' key={p.id}>
+                        <li className='d-flex flex-row justify-content-between border p-3 bg-white' key={p.id}>
                             <div>{p.id} - {p.nome}</div>
                             <div className='d-flex flex-row justify-content-between'>
-                                <div className='me-4'>
-                                    <Link to={`/editarpessoa/${p.id}`} className='border-0 text-decoration-none'>
-                                        <Button className='d-flex flex-row align-items-center btn-warning border-0'>
-                                            <MdOutlineModeEdit /><span className='text-white'>Edit</span>
-                                        </Button>
-                                    </Link>
-                                </div>
-                                <div className=''>
-                                    <Button className='d-flex flex-row align-items-center btn-danger border-0' onClick={() => openDeleteModal(p.id)}>
-                                        <MdDeleteForever />
-                                        <span className='text-white'>Delete</span>
-                                    </Button>
-                                </div>
+                                <div className='me-4'><Link to={`/editarpessoa/${p.id}`} className='border-0'><Button className='d-flex flex-row align-items-center bg-warning border-0'><MdOutlineModeEdit /><span className='text-white'>Edit</span></Button></Link></div>
+                                <div className=''><Button className='d-flex flex-row align-items-center bg-danger border-0' onClick={() => openDeleteModal(p.id)}><MdDeleteForever /><span className='text-white'>Delete</span></Button></div>
                             </div>
                         </li>
                  )))}

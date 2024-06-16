@@ -4,7 +4,6 @@ import Submit from '../Components/form/Submit';
 import api from '../Services/Api'
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import LinkButton from '../Components/form/LinkButton';
 
 const Login = () => {
   const [values, setValues] = useState({}) 
@@ -20,7 +19,7 @@ const Login = () => {
     try {
    
       // Enviar solicitação POST para o endpoint de login com os valores do formulário
-      const res = await fetch('https://teste-dev-server-side.onrender.com/api/checklogin', {  //
+      const res = await fetch('https://teste-dev-server-side.onrender.com/api/checklogin', { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -58,7 +57,7 @@ const Login = () => {
   }
 
   return (
-    <div className='login-screen'>
+    <div className='login-screen '>
       <div className='bg-info border-1'>Usuario: root<br/>Senha: root</div>
       <h1>Login</h1>
 
@@ -77,7 +76,7 @@ const Login = () => {
           placeholder='Digite sua senha'
           onChange={handleChange}
         />
-        <LinkButton to='/' className='btn btn-dark' text='Entrar' />
+        <Submit text='Entrar' />
       </form>
     </div>
   )

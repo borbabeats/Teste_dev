@@ -5,22 +5,20 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 import api from '../Services/Api'
 import { useState, useEffect } from 'react';
 import { Spinner, Col } from 'reactstrap'
-import { useParams } from 'react-router-dom';
 
 
 
-function EditaPessoa() {
-    const {id} = useParams()
-    const [person, setPerson] = useState('')
+function EditaPessoa({id}) {
+    const [person, setPerson] = useState(null)
     const [loading, setLoading] = useState(true)
 
 
     useEffect(() => {
+        console.log(id)
         const fetchPerson = async () => {
             try {
                 const response = await api.get(`/api/pessoas/${id}`)
                 setPerson(response.data)
-                console.log(response.data)
             } catch (err) {
                 console.error('Error fetching person:', err)
         } finally {
@@ -28,13 +26,13 @@ function EditaPessoa() {
         }
     }
     fetchPerson()
-}, [])
+}, [id])
 
 
     return (
         <>
-        <h1>Resumo do cadastro de {person.nome}</h1>
-        <Container className='d-flex flex-column bg-light rounded p-3'>
+        <h1>Resumo do cadastro de {person ? person.nome : '...'}  </h1>
+        <Container className='d-flex flex-column  p-5'>
         <LinkButton 
                     text='Voltar'
                     to='/dashboardpessoas'

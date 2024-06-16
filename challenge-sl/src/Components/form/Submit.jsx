@@ -1,9 +1,7 @@
-import { Button } from 'reactstrap'
-
 // eslint-disable-next-line react/prop-types
 function Submit({ text, className }) {
     return (
-        <Button className={className}>{text}</Button>
+        <button className={className}>{text}</button>
     )
 }
 

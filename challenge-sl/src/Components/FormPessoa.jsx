@@ -73,21 +73,21 @@ async function searchGender() {
 
 
     return (
-        <Container >
+        <Container className='bg-white p-1'>
             <Row> 
                 <Col lg='6'> 
-                    <Modal isOpen={modal} toggle={toggle} >
-                        <ModalHeader toggle={toggle} className='bg-info'>Information</ModalHeader>
-                        <ModalBody color='secondary'>
-                            Usuario criado com sucesso!!
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button  color='success' onClick={toggle}>OK</Button>
-                        </ModalFooter>
-                    </Modal>
-                </Col>
+        <Modal isOpen={modal} toggle={toggle} >
+            <ModalHeader toggle={toggle} className='bg-info'>Information</ModalHeader>
+            <ModalBody color='secondary'>
+                Usuario criado com sucesso!!
+            </ModalBody>
+            <ModalFooter>
+                <Button  color='success' onClick={toggle}>OK</Button>
+            </ModalFooter>
+        </Modal>
+        </Col>
         
-        <form  onSubmit={handleSubmit} >
+        <form  onSubmit={handleSubmit} className='bg-white'  >
                 <h1>Cadastrar Pessoa</h1>
             
                 <Input type='text' 
@@ -162,6 +162,10 @@ async function searchGender() {
 
             <Submit className='col-md-3' text='Enviar' />
         </form>
+        
+        
+       
+        
         </Row>
         </Container>
         

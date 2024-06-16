@@ -15,7 +15,7 @@ import Register from './Pages/Register.jsx'
 function App() {
 
   //const [cookies] = useCookies(['token'])
-  const isAuthenticated = !!localStorage.getItem('token')
+  const isAuthenticated = !! localStorage.getItem('token')
   //const isAuthenticated = !!cookies.token
 
   return (
@@ -28,13 +28,6 @@ function App() {
         <Route path='/login' element={<Login/>}/>
         <Route path='/register' element={<Register/>}/>
           
-        <Route path='/'  element={<Home/>} />
-        <Route path='/dashboardpessoas' element={<PessoasDashboard/>}/>
-        <Route path='/dashboardprotocolo' element={<ProtocolosDashboard/>} />
-        <Route path='/cadastrapessoa' element={<CadastraPessoa/>}/>
-        <Route path='/cadastraprotocolo' element={<CadastraProtocolo/>} />
-        <Route path='/editarpessoa/:id' element={<EditaPessoa/>}/>
-          {/*
           <Route path='/'  element={isAuthenticated ? <Home/> : <Navigate to='/login'/>} />
           <Route path='/dashboardpessoas' element={isAuthenticated ? <PessoasDashboard/> : <Navigate to='/login'/>}/>
           <Route path='/dashboardprotocolo' element={isAuthenticated ? <ProtocolosDashboard/> : <Navigate to='/login' />}/>
@@ -42,8 +35,6 @@ function App() {
           <Route path='/cadastraprotocolo' element={isAuthenticated ? <CadastraProtocolo/> : <Navigate to='/login'/>}/>
           <Route path='/editarpessoa/:id' element={isAuthenticated ? <EditaPessoa/> : <Navigate to='/login' />}/>
 
-          
-          */}
       </Routes>
     </BrowserRouter>
     </div>

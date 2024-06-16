@@ -19,7 +19,7 @@ function ProtocolosDashboard() {
 
     useEffect(() => {
         getProtocolos()
-    }, [])
+    },[])
     
 
     async function getProtocolos() {
@@ -72,7 +72,7 @@ function ProtocolosDashboard() {
         </Modal>
 
 
-        <Container className='bg-light rounded'>
+        <Container>
             <Col>
                 <Row className='p-1'>
                     <h1 className='text-center'>Painel de Controle de Protocolos</h1>
@@ -82,14 +82,14 @@ function ProtocolosDashboard() {
                 <LinkButton
                     text='Voltar'
                     to='/'
-                    color='btn-secondary'
+                    color='secondary'
                     icon={<IoMdArrowRoundBack />}
                     />
 
                     <LinkButton
                     text='Criar novo protocolo'
                     to='/cadastraprotocolo'
-                    color='btn-info border-0'
+                    color='bg-info'
                     icon={<SiProtondrive />}
                     />
                  
@@ -113,14 +113,8 @@ function ProtocolosDashboard() {
                                 <p>Nome do Contribuinte: <strong>{p.nome}</strong></p>
                             </div>
                             <div className='d-flex flex-row justify-content-between'>
-                                <Button className='d-flex flex-row align-items-center me-4 btn-warning btn-protocol border-0'>
-                                    <MdOutlineModeEdit />
-                                    <span className='text-white'>Edit</span>
-                                </Button>
-                                <Button className='d-flex flex-row align-items-center btn-danger btn-protocol border-0' onClick={() => openDeleteModal(p.id)}>
-                                    <MdDeleteForever/>
-                                    <span className='text-white'>Delete</span>
-                                </Button>
+                                <Button className='d-flex flex-row align-items-center me-4 bg-warning btn-protocol border-0'><MdOutlineModeEdit /><span className='text-white'>Edit</span></Button>
+                                <Button className='d-flex flex-row align-items-center bg-danger btn-protocol border-0' onClick={() => openDeleteModal(p.id)}><MdDeleteForever/><span className='text-white'>Delete</span></Button>
                             </div>
 
                         </li>
