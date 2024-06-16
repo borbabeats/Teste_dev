@@ -59,7 +59,7 @@ async function getPerson() {
 
 
     return (
-        <Container className='bg-white p-1'>
+        <Container>
             <Row> 
                 <Col lg='6'> 
         <Modal isOpen={modal} toggle={toggle} >
@@ -73,7 +73,7 @@ async function getPerson() {
         </Modal>
         </Col>
         
-        <form  onSubmit={handleSubmit} className='bg-white'  >
+        <form  onSubmit={handleSubmit}>
                 <h1>Preencher Protocolo</h1>
             <Textarea 
                 name='descricao'
