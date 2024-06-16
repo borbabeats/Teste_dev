@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Input from '../Components/form/Input';
-import LinkButton from '../Components/form/LinkButton';
+import Submit from '../Components/form/Submit';
 import api from '../Services/Api'
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
@@ -76,7 +76,7 @@ const Login = () => {
           placeholder='Digite sua senha'
           onChange={handleChange}
         />
-        <LinkButton to='/' text='Entrar' />
+        <Submit text='Entrar' />
       </form>
     </div>
   )
