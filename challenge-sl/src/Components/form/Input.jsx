@@ -1,4 +1,6 @@
 // eslint-disable-next-line react/prop-types
+
+
 function Input({ required,text, type, name, placeholder, value, maxlength, onKeyUp, onChange, defaultValue, className }) {
     return (
         <div className="d-flex flex-column">

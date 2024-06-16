@@ -6,7 +6,7 @@ import { IoMdArrowRoundBack } from "react-icons/io";
 
 function Pessoa() {
     return (
-        <Container className='d-flex flex-column  p-5'>
+        <Container className='d-flex flex-column bg-light rounded  p-5'>
         <LinkButton 
                     text='Voltar'
                     to='/dashboardpessoas'

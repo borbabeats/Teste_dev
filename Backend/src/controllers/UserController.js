@@ -44,7 +44,7 @@ class UserController {
     checkLogin(req, res) {
         const { username, password } = req.body;
         
-        console.log('Received login request for username:', username); // Debugging log
+        console.log('recebida solicitacao de login para usuario:', username); // Debugging log
     
         database.select('*').table('users').where('username', username).then(data => {
             if (data.length > 0) {
@@ -52,25 +52,25 @@ class UserController {
     
                 bcrypt.compare(password.toString(), hashedPassword, (bcryptErr, response) => {
                     if (bcryptErr) {
-                        console.error('Bcrypt error:', bcryptErr); // Debugging log
-                        return res.status(500).json({ Error: 'Password compare error' });
+                        console.error('Bcrypt erro:', bcryptErr); // Debugging log
+                        return res.status(500).json({ Error: 'Erro de comparacao de senha' });
                     }
                     if (response) {
                         const token = jwt.sign({ username }, jwtToken, { expiresIn: '1h' });
-                        console.log('Login successful, token generated:', token); // Debugging log
+                        console.log('Login com sucesso, token gerado:', token); // Debugging log
                         return res.json({ Status: token });
                     } else {
-                        console.log('Password not matched for username:', username); // Debugging log
-                        return res.status(401).json({ Error: 'Password not matched' });
+                        console.log('Senha nao encontrada com usuario:', username); // Debugging log
+                        return res.status(401).json({ Error: 'Senha nao combina' });
                     }
                 });
             } else {
-                console.log('No user found with username:', username); // Debugging log
-                return res.status(404).json({ Error: 'No username exists' });
+                console.log('nenhum usuario encontrado com esse nome:', username); // Debugging log
+                return res.status(404).json({ Error: 'Nome do usuario nao existe' });
             }
         }).catch(err => {
-            console.error('Database error:', err); // Debugging log
-            return res.status(500).json({ Error: 'Login error in server' });
+            console.error('Erro na base de dados:', err); // Debugging log
+            return res.status(500).json({ Error: 'Erro de login no servidor' });
         });
     };
 
@@ -78,11 +78,11 @@ class UserController {
         const token = req.cookies.token
 
         if(!token) {
-            return res.status(401).json({ error: 'Unauthorized - Please log in' })
+            return res.status(401).json({ error: 'Nao autorizado - Por favor, faca login' })
         }
         jwt.verify(token, jwtToken, (err, decoded) => {
             if(err) {
-                return res.status(401).json({ error: 'Invalid token' })
+                return res.status(401).json({ error: 'Token invalido' })
             }
 
             req.user = decoded
@@ -106,7 +106,6 @@ class UserController {
 
         database.insert({nome, data_nascimento, cpf, genero, estado, cidade, bairro, logradouro, numero, complemento})
         .table('pessoas').then(data => {
-            console.log(data)
             response.json({message:'Pessoa cadastrada com sucesso!'})
         }).catch(err => {
                 console.error(err)
@@ -116,7 +115,6 @@ class UserController {
 
     listarPessoas(req, res) {
         database.select('*').table('pessoas').then(data=>{
-            console.log(data)
             res.json(data)
         }).catch(err => {
             console.error(err)
@@ -163,7 +161,6 @@ class UserController {
 
         database.insert({descricao, data_protocolo, prazo, nome})
         .table('protocolos').then(data => {
-            console.log(data)
             res.json({message: 'Protocolo preenchido com sucesso!'})
         }).catch(err => {
             console.error(err)
@@ -172,7 +169,6 @@ class UserController {
 
     listarProtocolos(req, res){
         database.select('*').table('protocolos').then(data => {
-            console.log(data)
             res.json(data)
         }).catch(err => {
             console.error(err)
@@ -195,7 +191,6 @@ class UserController {
 
         database.where({ id:id }).update({descricao, data_protocolo, prazo, nome})
         .table('protocolos').then(data => {
-            console.log(data)
             res.json({message: 'Protocolo preenchido com sucesso!'})
         }).catch(err => {
             console.error(err)
