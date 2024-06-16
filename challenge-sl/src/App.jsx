@@ -15,7 +15,7 @@ import Register from './Pages/Register.jsx'
 function App() {
 
   //const [cookies] = useCookies(['token'])
-  const isAuthenticated = !! localStorage.getItem('token')
+  const isAuthenticated = !!localStorage.getItem('token')
   //const isAuthenticated = !!cookies.token
 
   return (
