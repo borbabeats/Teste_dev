@@ -20,7 +20,7 @@ const Login = () => {
     try {
    
       // Enviar solicitação POST para o endpoint de login com os valores do formulário
-      const res = await fetch('https://teste-dev-server-side.onrender.com/api/checklogin', {  //
+      const res = await fetch('https://teste-dev-server-side.onrender.com/api/checklogin', {  //https://teste-dev-server-side.onrender.com
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ const Login = () => {
           placeholder='Digite sua senha'
           onChange={handleChange}
         />
-        <LinkButton to='/' className='btn btn-dark' text='Enviar' />
+        <Submit className='btn btn-dark' text='Enviar' />
       </form>
     </div>
   )
