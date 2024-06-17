@@ -77,7 +77,7 @@ const Login = () => {
           placeholder='Digite sua senha'
           onChange={handleChange}
         />
-        <LinkButton to='/' className='btn btn-dark' text='Entrar' />
+        <LinkButton to='/' className='btn btn-dark' text='Enviar' />
       </form>
     </div>
   )
