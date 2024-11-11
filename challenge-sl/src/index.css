@@ -80,7 +80,7 @@ button:focus-visible {
   width: 100%;
   max-width: 250px;
   background-color: #dbd7d2 !important;
-  box-shadow: 4px 2px 8px #fffff0;
+  box-shadow: 0px 2px 4px #fffff0;
   font-size: 1.2rem !important;
   font-weight: 600 !important;
 }
@@ -90,7 +90,7 @@ button:focus-visible {
 }
 
 .cards:hover {
-  box-shadow: 4px 2px 12px #fffff0;
+  box-shadow: 0px 2px 8px #fffff0;
 }
 
 @media (prefers-color-scheme: light) {

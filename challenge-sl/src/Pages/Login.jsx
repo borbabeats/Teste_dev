@@ -3,15 +3,15 @@ import Input from '../Components/form/Input';
 import Submit from '../Components/form/Submit';
 import api from '../Services/Api'; // Make sure this is correctly imported
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
-import LinkButton from '../Components/form/LinkButton';
+//import { useCookies } from 'react-cookie';
+//import LinkButton from '../Components/form/LinkButton';
 
 const Login = () => {
   const [values, setValues] = useState({});
-  const [cookies, setCookie] = useCookies(['token']);
+  //const [cookies, setCookie] = useCookies(['token']);
   const navigate = useNavigate();
 
-  api.defaults.withCredentials = true; // Ensure credentials are sent with the request
+  api.defaults.withCredentials = false; // Ensure credentials are sent with the request
 
   const handleSubmit = async (e) => {
     e.preventDefault();

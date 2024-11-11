@@ -82,7 +82,9 @@ async function searchGender() {
                             Usuario criado com sucesso!!
                         </ModalBody>
                         <ModalFooter>
-                            <Button  color='success' onClick={toggle}>OK</Button>
+                            <Button color='danger' onClick={() => window.location.href = "/"}>Voltar para home</Button>
+                            <Button  color='success' onClick={toggle}>Novo usuário</Button>
+                            
                         </ModalFooter>
                     </Modal>
                 </Col>
