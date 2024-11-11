@@ -1,7 +1,7 @@
 const dotenv = require('dotenv')
 dotenv.config()
 
-var knex = require('knex') ({
+var knex = require('knex')({
     client: 'mysql',
     connection: {
         host: process.env.REACT_APP_DB_HOST,
@@ -10,4 +10,5 @@ var knex = require('knex') ({
         database: process.env.REACT_APP_DB_DATABASE
     }
 })
+
 module.exports = knex
