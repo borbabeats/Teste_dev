@@ -8,7 +8,8 @@ const app = express()
 // Define the list of allowed origins
 const allowedOrigins = [
   'https://cadastros-client-side.onrender.com',
-  'http://localhost:5173'
+  'http://localhost:5173',
+  'https://teste-dev-r3gx.vercel.app/'
 ]
 
 app.use(cors({
